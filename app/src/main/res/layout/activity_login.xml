@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:fitsSystemWindows="true"
-        android:fillViewport="true"
         android:scrollbarStyle="outsideOverlay">
 
         <android.support.constraint.ConstraintLayout
