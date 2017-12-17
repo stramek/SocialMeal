@@ -1,8 +1,8 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@android:color/white" />
+    <item android:drawable="@color/splash_bg" />
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/ic_action_name" />
+            android:src="@drawable/splash_logo" />
     </item>
 </layer-list>

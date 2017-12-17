@@ -4,10 +4,16 @@ import android.os.Bundle
 import com.marcinstramowski.socialmeal.R
 import com.marcinstramowski.socialmeal.screens.base.BaseActivity
 import com.marcinstramowski.socialmeal.screens.main.MainActivity
-import com.marcinstramowski.socialmeal.screens.main.MainContract
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.startActivity
 import javax.inject.Inject
+import android.graphics.drawable.AnimationDrawable
+import android.view.View
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
+
 
 /**
  * A email screen that offers email via email/password.
@@ -18,11 +24,44 @@ class LoginActivity : BaseActivity<LoginContract.Presenter>(), LoginContract.Vie
 
     @Inject override lateinit var presenter: LoginContract.Presenter
 
+    lateinit var animationDrawable: AnimationDrawable
+
     override fun onCreated(savedInstanceState: Bundle?) {
-        login.setOnClickListener {
-            finish()
-            startActivity<MainActivity>()
+
+        animationDrawable = loginBackground.background as AnimationDrawable
+        animationDrawable.setEnterFadeDuration(2000)
+        animationDrawable.setExitFadeDuration(5000)
+
+        loginSignIn.setOnClickListener {
+            Single.just(1)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnSubscribe {
+                        loginSignIn.isClickable = false
+                        loginSignIn.text = ""
+                        progressBar.visibility = View.VISIBLE
+                    }
+                    .delay(2000, TimeUnit.MILLISECONDS)
+                    .subscribe(
+                            { onNext -> goToMainActivity() }
+                    )
         }
+
+    }
+
+    fun goToMainActivity() {
+        finish()
+        startActivity<MainActivity>()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        animationDrawable.start()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        animationDrawable.stop()
     }
 }
 

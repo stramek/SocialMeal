@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Social Meal</string>
+
+    <string name="register_test">Don\'t have an account? <b>Sign up</b></string>
+    <string name="login_login_hint">Login</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_sign_in_button">Sign in</string>
+    <string name="login_forgot_password">Forgot password</string>
 </resources>

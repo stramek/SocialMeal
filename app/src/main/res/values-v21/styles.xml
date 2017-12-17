@@ -1,0 +1,11 @@
+<resources>
+
+    <style name="AppTheme.Login">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:colorEdgeEffect">@android:color/white</item>
+    </style>
+
+</resources>

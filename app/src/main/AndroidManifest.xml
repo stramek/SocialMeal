@@ -17,7 +17,9 @@
 
         <activity
             android:name=".screens.login.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.Login"
+            android:configChanges="orientation|screenLayout"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity
             android:name=".screens.splash.SplashActivity"
@@ -27,6 +29,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
     </application>
 

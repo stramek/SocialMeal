@@ -9,12 +9,46 @@
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/bgd_splash_screen</item>
+        <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme.Login">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="Progressbar.White" parent="AppTheme">
+        <item name="colorControlActivated">@android:color/white</item>
+    </style>
+
+    <style name="SelectableItemTheme">
+        <item name="colorControlHighlight">@color/hint_color</item>
+    </style>
+
+    <style name="LoginTextInputLayout" parent="Widget.Design.TextInputLayout">
+        <item name="android:background">@drawable/edit_text_background</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/hint_color</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:padding">@dimen/loginTextInputEditTextPadding</item>
+    </style>
+
+    <style name="LoginButton" parent="Base.TextAppearance.AppCompat.Widget.Button">
+        <item name="android:background">@drawable/login_button_selector</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/login_button_text_size</item>
+    </style>
+
+    <style name="LoginTextButton">
+        <item name="android:background">@null</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:padding">@dimen/margin_tiny</item>
+        <item name="android:theme">@style/SelectableItemTheme</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
     </style>
 
 </resources>
