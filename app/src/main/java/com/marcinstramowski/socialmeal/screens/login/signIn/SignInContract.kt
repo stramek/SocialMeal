@@ -7,10 +7,16 @@ import com.marcinstramowski.socialmeal.screens.base.BaseContract
  */
 class SignInContract {
     interface View : BaseContract.View<Presenter> {
-
+        fun showResetPasswordScreen()
+        fun showSignUpScreen()
+        fun showMainActivity()
+        fun setSignInButtonProcessing()
+        fun setSignInButtonProcessingFinished()
     }
 
     interface Presenter : BaseContract.Presenter {
-
+        fun onSignInButtonClick()
+        fun onResetPasswordClick()
+        fun onSignUpButtonClick()
     }
 }

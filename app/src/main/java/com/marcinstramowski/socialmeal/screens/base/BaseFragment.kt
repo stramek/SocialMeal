@@ -15,7 +15,7 @@ abstract class BaseFragment<out T : BaseContract.Presenter> : DaggerFragment(), 
 
     abstract val contentViewId: Int
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
             inflater.inflate(contentViewId, container, false)
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
@@ -25,6 +25,8 @@ abstract class BaseFragment<out T : BaseContract.Presenter> : DaggerFragment(), 
         presenter.onCreate()
     }
 
+    abstract fun onCreated(savedInstanceState: Bundle?)
+
     private fun initActivityFragmentManager() {
         if (activity is ActivityFragmentManager) {
             activityFragmentManager = activity as ActivityFragmentManager
@@ -33,10 +35,18 @@ abstract class BaseFragment<out T : BaseContract.Presenter> : DaggerFragment(), 
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        presenter.onStart()
+    }
+
+    override fun onStop() {
+        presenter.onStop()
+        super.onStop()
+    }
+
     override fun onDestroy() {
         presenter.onDestroy()
         super.onDestroy()
     }
-
-    abstract fun onCreated(savedInstanceState: Bundle?)
 }

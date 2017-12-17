@@ -12,8 +12,12 @@ interface BaseContract {
 
     interface Presenter {
 
-        fun onCreate()
+        fun onCreate() {}
 
-        fun onDestroy()
+        fun onDestroy() {}
+
+        fun onStart() {}
+
+        fun onStop() {}
     }
 }

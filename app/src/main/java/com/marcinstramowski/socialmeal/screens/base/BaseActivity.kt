@@ -18,6 +18,16 @@ abstract class BaseActivity<out T : BaseContract.Presenter> : DaggerAppCompatAct
         presenter.onCreate()
     }
 
+    override fun onStart() {
+        super.onStart()
+        presenter.onStart()
+    }
+
+    override fun onStop() {
+        presenter.onStop()
+        super.onStop()
+    }
+
     override fun onDestroy() {
         presenter.onDestroy()
         super.onDestroy()
