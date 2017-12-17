@@ -1,5 +1,6 @@
 package com.marcinstramowski.socialmeal.api
 
+import android.os.Debug
 import com.marcinstramowski.socialmeal.BuildConfig
 import com.marcinstramowski.socialmeal.api.auth.model.Token
 import io.reactivex.Single
@@ -53,8 +54,15 @@ interface ServerApi {
         }
 
         private fun basicOkHttpBuilder() = OkHttpClient.Builder()
-                .connectTimeout(3, TimeUnit.SECONDS)
-                .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                .connectTimeout(5, TimeUnit.SECONDS)
+                .addInterceptor(HttpLoggingInterceptor().setLevel(getLoggingLevel()))
+
+        private fun getLoggingLevel(): HttpLoggingInterceptor.Level {
+            return when (BuildConfig.DEBUG) {
+                true -> HttpLoggingInterceptor.Level.BODY
+                else -> HttpLoggingInterceptor.Level.NONE
+            }
+        }
 
         /**
          * simple builder from OkHttpClient parameter
