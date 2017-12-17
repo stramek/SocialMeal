@@ -11,6 +11,8 @@ import dagger.android.support.DaggerFragment
  */
 abstract class BaseFragment<out T : BaseContract.Presenter> : DaggerFragment(), BaseContract.View<T> {
 
+    lateinit var activityFragmentManager: ActivityFragmentManager
+
     abstract val contentViewId: Int
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
@@ -18,8 +20,17 @@ abstract class BaseFragment<out T : BaseContract.Presenter> : DaggerFragment(), 
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initActivityFragmentManager()
         onCreated(savedInstanceState)
         presenter.onCreate()
+    }
+
+    private fun initActivityFragmentManager() {
+        if (activity is ActivityFragmentManager) {
+            activityFragmentManager = activity as ActivityFragmentManager
+        } else {
+            throw RuntimeException("Activity should implements ParentRouterManager!")
+        }
     }
 
     override fun onDestroy() {

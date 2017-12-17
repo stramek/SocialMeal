@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.view_progress_button.view.*
  */
 class ProgressButton(context: Context, attrs: AttributeSet?) : FrameLayout(context, attrs) {
 
-    private var buttonText: String
+    private val buttonText: String
 
     init {
         LayoutInflater.from(context).inflate(R.layout.view_progress_button, this)

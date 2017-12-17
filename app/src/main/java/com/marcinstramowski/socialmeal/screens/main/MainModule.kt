@@ -1,7 +1,6 @@
 package com.marcinstramowski.socialmeal.screens.main
 
 import com.marcinstramowski.socialmeal.di.ActivityScoped
-import com.marcinstramowski.socialmeal.screens.login.LoginActivity
 import dagger.Binds
 import dagger.Module
 

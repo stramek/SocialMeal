@@ -6,7 +6,7 @@ import javax.inject.Inject
 /**
  * Created by marcinstramowski on 09.12.2017.
  */
-class LoginPresenter @Inject constructor(val view: LoginContract.View) : LoginContract.Presenter {
+class AccountPresenter @Inject constructor(val view: AccountContract.View) : AccountContract.Presenter {
 
     override fun onCreate() {
 

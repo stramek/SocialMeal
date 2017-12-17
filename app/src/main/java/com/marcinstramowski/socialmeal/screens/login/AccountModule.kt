@@ -1,8 +1,6 @@
 package com.marcinstramowski.socialmeal.screens.login
 
 import com.marcinstramowski.socialmeal.di.ActivityScoped
-import com.marcinstramowski.socialmeal.screens.main.MainContract
-import com.marcinstramowski.socialmeal.screens.main.MainPresenter
 import dagger.Binds
 import dagger.Module
 
@@ -14,13 +12,13 @@ import dagger.Module
  * [TasksPresenter].
  */
 @Module
-abstract class LoginModule {
+abstract class AccountModule {
 
     @ActivityScoped
     @Binds
-    abstract fun bindLoginPresenter(presenter: LoginPresenter): LoginContract.Presenter
+    abstract fun bindAccountPresenter(presenter: AccountPresenter): AccountContract.Presenter
 
     @ActivityScoped
     @Binds
-    abstract fun bindLoginView(view: LoginActivity): LoginContract.View
+    abstract fun bindAccountView(view: AccountActivity): AccountContract.View
 }

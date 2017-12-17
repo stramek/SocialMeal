@@ -2,8 +2,15 @@
     <string name="app_name">Social Meal</string>
 
     <string name="register_test">Don\'t have an account? <b>Sign up</b></string>
-    <string name="login_login_hint">Login</string>
+    <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Password</string>
     <string name="login_sign_in_button">Sign in</string>
     <string name="login_forgot_password">Forgot password</string>
+
+    <string name="sign_up_name">Name</string>
+    <string name="sign_up_surname">Surname</string>
+    <string name="sign_up_confirm_password">Confirm password</string>
+    <string name="sign_up_sign_up_button">Sign up</string>
+
+    <string name="remind_password_reset">Reset password</string>
 </resources>
