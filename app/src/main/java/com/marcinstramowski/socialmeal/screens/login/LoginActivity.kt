@@ -9,6 +9,7 @@ import org.jetbrains.anko.startActivity
 import javax.inject.Inject
 import android.graphics.drawable.AnimationDrawable
 import android.view.View
+import com.github.ajalt.timberkt.e
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -32,18 +33,16 @@ class LoginActivity : BaseActivity<LoginContract.Presenter>(), LoginContract.Vie
         animationDrawable.setEnterFadeDuration(2000)
         animationDrawable.setExitFadeDuration(5000)
 
-        loginSignIn.setOnClickListener {
+        loginProgressButton.setOnClickListener {
             Single.just(1)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .doOnSubscribe {
-                        loginSignIn.isClickable = false
-                        loginSignIn.text = ""
-                        progressBar.visibility = View.VISIBLE
-                    }
+                    .doOnSubscribe { loginProgressButton.setProcessing() }
+                    .doOnError { loginProgressButton.setProcessingFinished() }
                     .delay(2000, TimeUnit.MILLISECONDS)
                     .subscribe(
-                            { onNext -> goToMainActivity() }
+                            { _ -> goToMainActivity() },
+                            { error -> e(error) }
                     )
         }
 
