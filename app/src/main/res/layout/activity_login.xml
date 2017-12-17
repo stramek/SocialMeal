@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loginBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/loginBackground"
-    android:background="@drawable/login_animation_list">
+    android:background="@drawable/login_animation_list"
+    tools:context=".screens.login.LoginActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,9 +18,9 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clipChildren="false"
             android:paddingBottom="@dimen/margin_big"
-            android:paddingTop="@dimen/margin_big"
-            android:clipChildren="false">
+            android:paddingTop="@dimen/margin_big">
 
             <android.support.constraint.Guideline
                 android:id="@+id/loginLeftGuideLine"

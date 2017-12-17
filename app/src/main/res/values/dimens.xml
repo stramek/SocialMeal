@@ -8,10 +8,11 @@
     <dimen name="margin_normal">16dp</dimen>
     <dimen name="margin_big">32dp</dimen>
 
-    <dimen name="loginTextInputEditTextPadding">12dp</dimen>
+    <dimen name="login_text_input_edit_text_padding">12dp</dimen>
 
     <dimen name="login_logo_size">80dp</dimen>
     <dimen name="login_title_size">42sp</dimen>
     <dimen name="login_button_text_size">22sp</dimen>
     <dimen name="login_social_button_size">60dp</dimen>
+    <dimen name="login_input_edit_text_text_size">18sp</dimen>
 </resources>
