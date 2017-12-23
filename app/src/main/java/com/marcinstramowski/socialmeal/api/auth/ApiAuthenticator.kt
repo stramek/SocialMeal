@@ -13,7 +13,7 @@ import com.marcinstramowski.socialmeal.api.auth.model.RefreshTokenRequest
 import javax.inject.Inject
 
 /**
- * Created by marcinstramowski on 09.12.2017.
+ * Api authenticator helper class
  */
 class ApiAuthenticator @Inject constructor(
         val userPrefs: UserPrefsDataSource,
@@ -43,7 +43,7 @@ class ApiAuthenticator @Inject constructor(
     }
 
     /**
-     * call request for refresh access token
+     * Call request for access token refresh
      */
-    fun refreshAccessToken(refreshToken: String) = api.refreshToken(RefreshTokenRequest(refreshToken)).blockingGet().token
+    private fun refreshAccessToken(refreshToken: String) = api.refreshToken(RefreshTokenRequest(refreshToken)).blockingGet().token
 }

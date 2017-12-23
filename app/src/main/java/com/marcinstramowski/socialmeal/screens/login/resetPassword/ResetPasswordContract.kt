@@ -3,8 +3,8 @@ package com.marcinstramowski.socialmeal.screens.login.resetPassword
 import com.marcinstramowski.socialmeal.screens.base.BaseContract
 
 /**
- * Created by marcinstramowski on 17.12.2017.
- */
+* Contract interfaces between [ResetPasswordFragment] and [ResetPasswordPresenter]
+*/
 class ResetPasswordContract {
     interface View : BaseContract.View<Presenter> {
 

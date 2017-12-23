@@ -5,11 +5,7 @@ import dagger.Binds
 import dagger.Module
 
 /**
- * Created by marcinstramowski on 09.12.2017.
- */
-/**
- * This is a Dagger module. We use this to pass in the View dependency to the
- * [TasksPresenter].
+ * Specifies classes delivered by dagger when injecting [AccountContract] interfaces.
  */
 @Module
 abstract class AccountModule {

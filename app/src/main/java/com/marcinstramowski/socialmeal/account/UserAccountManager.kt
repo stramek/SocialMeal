@@ -4,20 +4,26 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * Created by marcinstramowski on 09.12.2017.
+ * User management helper class
  */
 @Singleton
 class UserAccountManager @Inject constructor(private val userPrefs: UserPrefsDataSource) {
 
+    /**
+     * Voids user access tokens
+     */
     fun logoutUser() {
         userPrefs.accessToken = null
         userPrefs.refreshToken = null
-        userPrefs.uniqueUserId = null
     }
 
+    /**
+     *  Determines if application should omit login screen and take user straight to [MainActivity]
+     */
     fun shouldAutoLogUser() = userPrefs.refreshToken != null && userPrefs.rememberMe
 
-    fun isUserLogged() = userPrefs.uniqueUserId != null
-
-    fun isRefreshTokenValid() = userPrefs.refreshToken != null
+    /**
+     * Determines if user it logged to the application
+     */
+    fun isUserLogged() = userPrefs.refreshToken != null
 }

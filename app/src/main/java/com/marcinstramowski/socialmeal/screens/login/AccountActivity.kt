@@ -6,13 +6,20 @@ import com.marcinstramowski.socialmeal.screens.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
 import android.graphics.drawable.AnimationDrawable
+import android.os.PersistableBundle
 import com.marcinstramowski.socialmeal.screens.login.signIn.SignInFragment
 
 
 /**
- * A email screen that offers email via email/password.
+ * Activity with gradient background with container that inflates not logged user views
+ * such as [SignInFragment], [SignUpFragment] or [ResetPasswordFragment]
  */
 class AccountActivity : BaseActivity<AccountContract.Presenter>(), AccountContract.View {
+
+    companion object {
+        val GRADIENT_ENTER_DURATION_MS = 2000
+        val GRADIENT_EXIT_DURATION_MS = 5000
+    }
 
     override val contentViewId = R.layout.activity_login
 
@@ -21,10 +28,15 @@ class AccountActivity : BaseActivity<AccountContract.Presenter>(), AccountContra
     private lateinit var animationDrawable: AnimationDrawable
 
     override fun onCreated(savedInstanceState: Bundle?) {
-        animationDrawable = container.background as AnimationDrawable
-        animationDrawable.setEnterFadeDuration(2000)
-        animationDrawable.setExitFadeDuration(5000)
+        setupBackground()
         savedInstanceState ?: setFragment(SignInFragment())
+    }
+
+    private fun setupBackground() {
+        animationDrawable = (container.background as AnimationDrawable).apply {
+            setEnterFadeDuration(GRADIENT_ENTER_DURATION_MS)
+            setExitFadeDuration(GRADIENT_EXIT_DURATION_MS)
+        }
     }
 
     override fun onResume() {
@@ -33,8 +45,8 @@ class AccountActivity : BaseActivity<AccountContract.Presenter>(), AccountContra
     }
 
     override fun onPause() {
-        super.onPause()
         animationDrawable.stop()
+        super.onPause()
     }
 }
 

@@ -1,6 +1,8 @@
 package com.marcinstramowski.socialmeal.screens.login.signIn
 
 import android.os.Bundle
+import android.support.transition.Explode
+import android.transition.Fade
 import com.marcinstramowski.socialmeal.R
 import com.marcinstramowski.socialmeal.screens.base.BaseFragment
 import com.marcinstramowski.socialmeal.screens.login.resetPassword.ResetPasswordFragment
@@ -11,7 +13,7 @@ import org.jetbrains.anko.support.v4.startActivity
 import javax.inject.Inject
 
 /**
- * Created by marcinstramowski on 17.12.2017.
+ * Screen that allows user sign in to the application
  */
 class SignInFragment : BaseFragment<SignInContract.Presenter>(), SignInContract.View {
 

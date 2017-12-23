@@ -6,7 +6,7 @@ import dagger.android.support.DaggerAppCompatActivity
 import org.jetbrains.anko.intentFor
 
 /**
- * Created by marcinstramowski on 09.12.2017.
+ * Initial activity after application is launched.
  */
 class SplashActivity : DaggerAppCompatActivity() {
 

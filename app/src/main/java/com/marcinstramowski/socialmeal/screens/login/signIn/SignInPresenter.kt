@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
- * Created by marcinstramowski on 17.12.2017.
+ * Sign in screen logic
  */
 class SignInPresenter @Inject constructor(
         private val view: SignInContract.View

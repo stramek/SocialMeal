@@ -3,15 +3,11 @@ package com.marcinstramowski.socialmeal.screens.login
 import com.marcinstramowski.socialmeal.screens.base.BaseContract
 
 /**
- * This specifies the contract between the view and the presenter.
+ * Contract interfaces between [AccountActivity] and [AccountPresenter]
  */
 interface AccountContract {
 
-    interface View : BaseContract.View<Presenter> {
+    interface View : BaseContract.View<Presenter>
 
-    }
-
-    interface Presenter : BaseContract.Presenter {
-
-    }
+    interface Presenter : BaseContract.Presenter
 }

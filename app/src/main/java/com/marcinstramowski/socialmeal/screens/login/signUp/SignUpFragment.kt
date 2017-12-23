@@ -7,13 +7,14 @@ import com.marcinstramowski.socialmeal.screens.login.signIn.SignInContract
 import javax.inject.Inject
 
 /**
- * Created by marcinstramowski on 17.12.2017.
+ * Screen that allows user sign up to the application
  */
 class SignUpFragment : BaseFragment<SignUpContract.Presenter>(), SignUpContract.View {
 
     @Inject override lateinit var presenter: SignUpContract.Presenter
 
     override val contentViewId = R.layout.fragment_sign_up
+
 
     override fun onCreated(savedInstanceState: Bundle?) {
 

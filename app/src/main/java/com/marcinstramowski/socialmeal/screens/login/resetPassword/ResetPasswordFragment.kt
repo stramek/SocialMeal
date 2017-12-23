@@ -6,7 +6,7 @@ import com.marcinstramowski.socialmeal.screens.base.BaseFragment
 import javax.inject.Inject
 
 /**
- * Created by marcinstramowski on 17.12.2017.
+ * Screen that allows user to reset their password
  */
 class ResetPasswordFragment : BaseFragment<ResetPasswordContract.Presenter>(), ResetPasswordContract.View {
 
@@ -17,5 +17,4 @@ class ResetPasswordFragment : BaseFragment<ResetPasswordContract.Presenter>(), R
     override fun onCreated(savedInstanceState: Bundle?) {
 
     }
-
 }

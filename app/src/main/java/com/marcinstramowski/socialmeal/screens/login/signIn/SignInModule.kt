@@ -5,7 +5,7 @@ import dagger.Binds
 import dagger.Module
 
 /**
- * Created by marcinstramowski on 17.12.2017.
+ * Specifies classes delivered by dagger when injecting [SignInContract] interfaces.
  */
 @Module
 abstract class SignInModule {

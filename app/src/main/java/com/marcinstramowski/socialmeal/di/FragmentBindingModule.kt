@@ -10,7 +10,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 /**
- * Created by marcinstramowski on 09.12.2017.
+ * Defines fragments with its modules to allow Dagger to inject its dependencies
  */
 @Module
 abstract class FragmentBindingModule {

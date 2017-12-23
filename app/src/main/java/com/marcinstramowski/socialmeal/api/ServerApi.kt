@@ -1,6 +1,5 @@
 package com.marcinstramowski.socialmeal.api
 
-import android.os.Debug
 import com.marcinstramowski.socialmeal.BuildConfig
 import com.marcinstramowski.socialmeal.api.auth.model.Token
 import io.reactivex.Single
@@ -17,15 +16,22 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 /**
- * Created by marcinstramowski on 09.12.2017.
+ * Configuration of API
  */
 interface ServerApi {
 
+    /**
+     * Contains account management requests to API
+     */
     interface ManagementApi {
+
         @POST("token/refresh")
         fun refreshToken(@Body refreshTokenRequest: RefreshTokenRequest): Single<Token>
     }
 
+    /**
+     * Contains user data requests to API
+     */
     interface UserApi {
 
     }
@@ -33,9 +39,14 @@ interface ServerApi {
     companion object Factory {
 
         /**
-         * prepare service with api calls for logged user
-         * need authenticator in case of access token not valid
-         * need token handler for automatic header with authentication add
+         * Determines api maximum delay in seconds after sending request before returning timeout exception
+         */
+        private val API_TIMEOUT_DELAY_SECONDS: Long = 5
+
+        /**
+         * Prepare service with api calls for logged user.
+         * Need authenticator in case of access token not valid.
+         * Need token handler for automatic header with authentication token.
          */
         fun prepareUserService(tokenHandler: AuthHeaderInterceptor, authenticator: ApiAuthenticator): UserApi {
             val userOkHttp = basicOkHttpBuilder()
@@ -46,17 +57,23 @@ interface ServerApi {
         }
 
         /**
-         * prepare service for api calls like login, register and refresh token (management)
+         * Prepare service for api calls like login, register and refresh token (management)
          */
         fun prepareManagementService(): ManagementApi {
             val okHttp = basicOkHttpBuilder().build()
             return fromRetrofit(okHttp).create(ManagementApi::class.java)
         }
 
+        /**
+         * Basic api OkHttp builder
+         */
         private fun basicOkHttpBuilder() = OkHttpClient.Builder()
-                .connectTimeout(5, TimeUnit.SECONDS)
+                .connectTimeout(API_TIMEOUT_DELAY_SECONDS, TimeUnit.SECONDS)
                 .addInterceptor(HttpLoggingInterceptor().setLevel(getLoggingLevel()))
 
+        /**
+         * Provides api logging level. Logs are available only on debug version
+         */
         private fun getLoggingLevel(): HttpLoggingInterceptor.Level {
             return when (BuildConfig.DEBUG) {
                 true -> HttpLoggingInterceptor.Level.BODY
@@ -65,7 +82,7 @@ interface ServerApi {
         }
 
         /**
-         * simple builder from OkHttpClient parameter
+         * Simple builder from [OkHttpClient] parameter
          */
         private fun fromRetrofit(userOkHttp: OkHttpClient): Retrofit {
             return Retrofit.Builder()
@@ -76,6 +93,9 @@ interface ServerApi {
                     .build()
         }
 
+        /**
+         * Builder for Json Moshi parser
+         */
         private fun getMoshiObjectMapper() = Moshi.Builder().build()
     }
 }
