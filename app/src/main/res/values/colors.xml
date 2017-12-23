@@ -17,4 +17,7 @@
     <color name="light_blue_500">#2196F3</color>
 
     <color name="hint_color">#77FFFFFF</color>
+
+    <color name="account_button_disabled_color">#55FFFFFF</color>
+    <color name="account_enabled_color">#FFFFFFFF</color>
 </resources>

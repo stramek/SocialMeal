@@ -3,6 +3,7 @@ package com.marcinstramowski.socialmeal.screens.login.signIn
 import android.os.Bundle
 import android.support.transition.Explode
 import android.transition.Fade
+import com.jakewharton.rxbinding2.widget.textChanges
 import com.marcinstramowski.socialmeal.R
 import com.marcinstramowski.socialmeal.screens.base.BaseFragment
 import com.marcinstramowski.socialmeal.screens.login.resetPassword.ResetPasswordFragment
@@ -25,6 +26,18 @@ class SignInFragment : BaseFragment<SignInContract.Presenter>(), SignInContract.
         loginProgressButton.setOnClickListener { presenter.onSignInButtonClick() }
         resetPasswordButton.setOnClickListener { presenter.onResetPasswordClick() }
         signUpButton.setOnClickListener { presenter.onSignUpButtonClick() }
+        presenter.observeFieldsChanges(
+                loginLogin.textChanges().map { it.toString() },
+                loginPassword.textChanges().map { it.toString() }
+        )
+    }
+
+    override fun setLoginButtonEnabled() {
+        loginProgressButton.setEnabled()
+    }
+
+    override fun setLoginButtonDisabled() {
+        loginProgressButton.setDisabled()
     }
 
     override fun showResetPasswordScreen() {

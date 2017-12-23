@@ -1,8 +1,10 @@
 package com.marcinstramowski.socialmeal.screens.login.resetPassword
 
 import android.os.Bundle
+import com.jakewharton.rxbinding2.widget.textChanges
 import com.marcinstramowski.socialmeal.R
 import com.marcinstramowski.socialmeal.screens.base.BaseFragment
+import kotlinx.android.synthetic.main.fragment_reset_password.*
 import javax.inject.Inject
 
 /**
@@ -15,6 +17,14 @@ class ResetPasswordFragment : BaseFragment<ResetPasswordContract.Presenter>(), R
     override val contentViewId = R.layout.fragment_reset_password
 
     override fun onCreated(savedInstanceState: Bundle?) {
+        presenter.observeFieldsChanges(resetPasswordEmail.textChanges().map { it.toString() })
+    }
 
+    override fun setResetButtonEnabled() {
+        resetProgressButton.setEnabled()
+    }
+
+    override fun setResetButtonDisabled() {
+        resetProgressButton.setDisabled()
     }
 }

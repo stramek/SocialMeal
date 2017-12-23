@@ -1,12 +1,12 @@
 package com.marcinstramowski.socialmeal.screens.login.signIn
 
 import com.github.ajalt.timberkt.e
-import com.marcinstramowski.socialmeal.screens.login.resetPassword.ResetPasswordContract
+import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_sign_in.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -19,9 +19,28 @@ class SignInPresenter @Inject constructor(
 
     private val compositeDisposable = CompositeDisposable()
 
-    override fun onStop() {
+    override fun onDestroy() {
         compositeDisposable.clear()
-        super.onStop()
+        super.onDestroy()
+    }
+
+    override fun observeFieldsChanges(emailField: Observable<String>, passwordField: Observable<String>) {
+        val isSignInEnabled: Observable<Boolean> = Observable.combineLatest(
+                emailField,
+                passwordField,
+                BiFunction { login, password -> login.isNotEmpty() && password.isNotEmpty() })
+        compositeDisposable.add(isSignInEnabled
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        { fieldsFilled ->
+                            when (fieldsFilled) {
+                                true -> view.setLoginButtonEnabled()
+                                false -> view.setLoginButtonDisabled()
+                            }
+                        },
+                        { error -> e(error) }
+                )
+        )
     }
 
     override fun onSignInButtonClick() {
