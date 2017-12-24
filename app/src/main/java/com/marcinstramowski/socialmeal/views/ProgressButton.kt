@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.view_progress_button.view.*
  */
 class ProgressButton(context: Context, attrs: AttributeSet?) : FrameLayout(context, attrs) {
 
-    private var buttonText: String
+    private val buttonText: String
 
     init {
         LayoutInflater.from(context).inflate(R.layout.view_progress_button, this)
@@ -29,16 +29,26 @@ class ProgressButton(context: Context, attrs: AttributeSet?) : FrameLayout(conte
         button.text = buttonText
     }
 
+    fun setDisabled() {
+        button.isEnabled = false
+        button.setTextColor(ContextCompat.getColor(context, R.color.account_button_disabled_color))
+    }
+
+    fun setEnabled() {
+        button.isEnabled = true
+        button.setTextColor(ContextCompat.getColor(context, R.color.account_enabled_color))
+    }
+
     fun setProcessing() {
         button.text = null
         progressBar.visibility = View.VISIBLE
-        button.isClickable = false
+        setDisabled()
     }
 
     fun setProcessingFinished() {
         button.text = buttonText
         progressBar.visibility = View.INVISIBLE
-        button.isClickable = true
+        setEnabled()
     }
 
     override fun setOnClickListener(l: OnClickListener?) {

@@ -1,6 +1,7 @@
 package com.marcinstramowski.socialmeal.screens.main
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
 import com.marcinstramowski.socialmeal.R
 import com.marcinstramowski.socialmeal.screens.base.BaseActivity

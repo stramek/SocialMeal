@@ -1,16 +1,11 @@
 package com.marcinstramowski.socialmeal.screens.main
 
 import com.marcinstramowski.socialmeal.di.ActivityScoped
-import com.marcinstramowski.socialmeal.screens.login.LoginActivity
 import dagger.Binds
 import dagger.Module
 
 /**
- * Created by marcinstramowski on 09.12.2017.
- */
-/**
- * This is a Dagger module. We use this to pass in the View dependency to the
- * [TasksPresenter].
+ * Specifies classes delivered by dagger when injecting [MainContract] interfaces.
  */
 @Module
 abstract class MainModule {

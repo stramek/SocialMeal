@@ -38,7 +38,7 @@
 
     <style name="LoginButton" parent="Base.TextAppearance.AppCompat.Widget.Button">
         <item name="android:background">@drawable/login_button_selector</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/account_enabled_color</item>
         <item name="android:textSize">@dimen/login_button_text_size</item>
     </style>
 

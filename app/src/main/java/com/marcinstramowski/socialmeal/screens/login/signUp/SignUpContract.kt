@@ -1,12 +1,11 @@
-package com.marcinstramowski.socialmeal.screens.login
+package com.marcinstramowski.socialmeal.screens.login.signUp
 
 import com.marcinstramowski.socialmeal.screens.base.BaseContract
 
 /**
- * This specifies the contract between the view and the presenter.
+ * Contract interfaces between [SignUpFragment] and [SignUpPresenter]
  */
-interface LoginContract {
-
+class SignUpContract {
     interface View : BaseContract.View<Presenter> {
 
     }

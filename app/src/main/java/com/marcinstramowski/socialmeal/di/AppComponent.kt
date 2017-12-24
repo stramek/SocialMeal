@@ -11,7 +11,7 @@ import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 /**
- * This is a Dagger component. Refer to [HmoApplication] for the list of Dagger components
+ * This is a Dagger component. Refer to [SocialMealApplication] for the list of Dagger components
  * used in this application.
  *
  * Even though Dagger allows annotating a [Component] as a singleton, the code
