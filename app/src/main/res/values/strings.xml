@@ -17,4 +17,10 @@
     <string name="main_activity_bottom_drawer_my_events">My events</string>
     <string name="main_activity_bottom_drawer_profile">Profile</string>
     <string name="main_activity_bottom_drawer_search">Search</string>
+    <string name="profile_name">Name</string>
+    <string name="profile_surname">Surname</string>
+    <string name="profile_street">Street</string>
+    <string name="profile_city">City</string>
+    <string name="profile_post_code">Postcode</string>
+    <string name="profile_save_changes">Save changes</string>
 </resources>

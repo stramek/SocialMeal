@@ -16,6 +16,7 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
 
     override fun onCreated(savedInstanceState: Bundle?) {
         configureBottomNavigationDrawer()
+        savedInstanceState ?: setNavigationDrawerDefaultTab()
     }
 
     private fun configureBottomNavigationDrawer() {
@@ -36,6 +37,8 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
                 else -> false
             }
         }
+    }
+    private fun setNavigationDrawerDefaultTab() {
         navigation.selectedItemId = R.id.drawer_search
     }
 
