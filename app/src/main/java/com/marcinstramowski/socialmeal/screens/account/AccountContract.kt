@@ -1,4 +1,4 @@
-package com.marcinstramowski.socialmeal.screens.login
+package com.marcinstramowski.socialmeal.screens.account
 
 import com.marcinstramowski.socialmeal.screens.base.BaseContract
 

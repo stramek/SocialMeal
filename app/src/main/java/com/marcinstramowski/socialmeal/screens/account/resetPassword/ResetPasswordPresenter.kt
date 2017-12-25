@@ -1,4 +1,4 @@
-package com.marcinstramowski.socialmeal.screens.login.resetPassword
+package com.marcinstramowski.socialmeal.screens.account.resetPassword
 
 import com.github.ajalt.timberkt.e
 import io.reactivex.Observable

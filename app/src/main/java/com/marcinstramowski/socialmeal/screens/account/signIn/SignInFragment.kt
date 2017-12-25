@@ -1,13 +1,11 @@
-package com.marcinstramowski.socialmeal.screens.login.signIn
+package com.marcinstramowski.socialmeal.screens.account.signIn
 
 import android.os.Bundle
-import android.support.transition.Explode
-import android.transition.Fade
 import com.jakewharton.rxbinding2.widget.textChanges
 import com.marcinstramowski.socialmeal.R
 import com.marcinstramowski.socialmeal.screens.base.BaseFragment
-import com.marcinstramowski.socialmeal.screens.login.resetPassword.ResetPasswordFragment
-import com.marcinstramowski.socialmeal.screens.login.signUp.SignUpFragment
+import com.marcinstramowski.socialmeal.screens.account.resetPassword.ResetPasswordFragment
+import com.marcinstramowski.socialmeal.screens.account.signUp.SignUpFragment
 import com.marcinstramowski.socialmeal.screens.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 import org.jetbrains.anko.support.v4.startActivity

@@ -1,4 +1,4 @@
-package com.marcinstramowski.socialmeal.screens.login.signIn
+package com.marcinstramowski.socialmeal.screens.account.signIn
 
 import com.github.ajalt.timberkt.e
 import io.reactivex.Observable

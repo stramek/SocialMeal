@@ -1,4 +1,4 @@
-package com.marcinstramowski.socialmeal.screens.login.signIn
+package com.marcinstramowski.socialmeal.screens.account.signIn
 
 import com.marcinstramowski.socialmeal.di.FragmentScoped
 import dagger.Binds

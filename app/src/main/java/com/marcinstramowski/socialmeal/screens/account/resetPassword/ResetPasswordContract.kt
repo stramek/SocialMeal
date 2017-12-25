@@ -1,4 +1,4 @@
-package com.marcinstramowski.socialmeal.screens.login.resetPassword
+package com.marcinstramowski.socialmeal.screens.account.resetPassword
 
 import com.marcinstramowski.socialmeal.screens.base.BaseContract
 import io.reactivex.Observable
@@ -6,7 +6,7 @@ import io.reactivex.Observable
 /**
 * Contract interfaces between [ResetPasswordFragment] and [ResetPasswordPresenter]
 */
-class ResetPasswordContract {
+interface ResetPasswordContract {
     interface View : BaseContract.View<Presenter> {
         fun setResetButtonEnabled()
         fun setResetButtonDisabled()

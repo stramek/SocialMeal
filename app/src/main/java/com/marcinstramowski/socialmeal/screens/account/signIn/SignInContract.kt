@@ -1,4 +1,4 @@
-package com.marcinstramowski.socialmeal.screens.login.signIn
+package com.marcinstramowski.socialmeal.screens.account.signIn
 
 import com.marcinstramowski.socialmeal.screens.base.BaseContract
 import io.reactivex.Observable
@@ -6,7 +6,7 @@ import io.reactivex.Observable
 /**
  * Contract interfaces between [SignInFragment] and [SignInPresenter]
  */
-class SignInContract {
+interface SignInContract {
     interface View : BaseContract.View<Presenter> {
         fun showResetPasswordScreen()
         fun showSignUpScreen()

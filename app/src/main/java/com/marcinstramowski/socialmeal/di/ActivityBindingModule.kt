@@ -1,7 +1,7 @@
 package com.marcinstramowski.socialmeal.di
 
-import com.marcinstramowski.socialmeal.screens.login.AccountActivity
-import com.marcinstramowski.socialmeal.screens.login.AccountModule
+import com.marcinstramowski.socialmeal.screens.account.AccountActivity
+import com.marcinstramowski.socialmeal.screens.account.AccountModule
 import com.marcinstramowski.socialmeal.screens.main.MainActivity
 import com.marcinstramowski.socialmeal.screens.main.MainModule
 import com.marcinstramowski.socialmeal.screens.splash.SplashActivity

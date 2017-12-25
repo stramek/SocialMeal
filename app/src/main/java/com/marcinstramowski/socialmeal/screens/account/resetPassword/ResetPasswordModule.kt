@@ -1,4 +1,4 @@
-package com.marcinstramowski.socialmeal.screens.login.resetPassword
+package com.marcinstramowski.socialmeal.screens.account.resetPassword
 
 import com.marcinstramowski.socialmeal.di.FragmentScoped
 import dagger.Binds

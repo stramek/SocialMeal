@@ -1,4 +1,4 @@
-package com.marcinstramowski.socialmeal.screens.login
+package com.marcinstramowski.socialmeal.screens.account
 
 import android.os.Bundle
 import com.marcinstramowski.socialmeal.R
@@ -6,8 +6,7 @@ import com.marcinstramowski.socialmeal.screens.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
 import android.graphics.drawable.AnimationDrawable
-import android.os.PersistableBundle
-import com.marcinstramowski.socialmeal.screens.login.signIn.SignInFragment
+import com.marcinstramowski.socialmeal.screens.account.signIn.SignInFragment
 
 
 /**

@@ -16,7 +16,7 @@
             android:label="@string/app_name" />
 
         <activity
-            android:name=".screens.login.AccountActivity"
+            android:name=".screens.account.AccountActivity"
             android:theme="@style/AppTheme.Login"
             android:configChanges="orientation|screenLayout"
             android:windowSoftInputMode="stateHidden|adjustPan" />

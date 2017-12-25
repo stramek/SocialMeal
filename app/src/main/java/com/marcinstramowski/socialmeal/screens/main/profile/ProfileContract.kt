@@ -1,11 +1,11 @@
-package com.marcinstramowski.socialmeal.screens.login.signUp
+package com.marcinstramowski.socialmeal.screens.main.profile
 
 import com.marcinstramowski.socialmeal.screens.base.BaseContract
 
 /**
- * Contract interfaces between [SignUpFragment] and [SignUpPresenter]
+ * Contract interfaces between [ProfileFragment] and [ProfilePresenter]
  */
-class SignUpContract {
+interface ProfileContract {
     interface View : BaseContract.View<Presenter> {
 
     }

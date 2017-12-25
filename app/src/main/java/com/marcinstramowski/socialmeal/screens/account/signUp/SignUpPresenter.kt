@@ -1,4 +1,4 @@
-package com.marcinstramowski.socialmeal.screens.login.signUp
+package com.marcinstramowski.socialmeal.screens.account.signUp
 
 import android.util.Patterns
 import javax.inject.Inject

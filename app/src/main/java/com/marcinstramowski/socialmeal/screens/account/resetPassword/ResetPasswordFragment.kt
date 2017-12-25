@@ -1,4 +1,4 @@
-package com.marcinstramowski.socialmeal.screens.login.resetPassword
+package com.marcinstramowski.socialmeal.screens.account.resetPassword
 
 import android.os.Bundle
 import com.jakewharton.rxbinding2.widget.textChanges

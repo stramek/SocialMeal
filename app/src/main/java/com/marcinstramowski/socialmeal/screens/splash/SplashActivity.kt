@@ -1,7 +1,7 @@
 package com.marcinstramowski.socialmeal.screens.splash
 
 import android.os.Bundle
-import com.marcinstramowski.socialmeal.screens.login.AccountActivity
+import com.marcinstramowski.socialmeal.screens.account.AccountActivity
 import dagger.android.support.DaggerAppCompatActivity
 import org.jetbrains.anko.intentFor
 
