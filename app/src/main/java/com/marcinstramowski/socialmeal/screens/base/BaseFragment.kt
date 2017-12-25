@@ -14,7 +14,7 @@ abstract class BaseFragment<out T : BaseContract.Presenter> : DaggerFragment(), 
 
     /**
      * Allows inheriting fragments to easily change view to other fragment
-     * though [ActivityFragmentManager.setFragment] and [ActivityFragmentManager.changeFragment] methods
+     * though [ActivityFragmentManager.setFragmentNoAnimation] and [ActivityFragmentManager.addFragmentToBackStack] methods
      */
     lateinit var activityFragmentManager: ActivityFragmentManager
 

@@ -13,4 +13,8 @@
     <string name="sign_up_sign_up_button">Sign up</string>
 
     <string name="remind_password_reset">Reset password</string>
+
+    <string name="main_activity_bottom_drawer_my_events">My events</string>
+    <string name="main_activity_bottom_drawer_profile">Profile</string>
+    <string name="main_activity_bottom_drawer_search">Search</string>
 </resources>
