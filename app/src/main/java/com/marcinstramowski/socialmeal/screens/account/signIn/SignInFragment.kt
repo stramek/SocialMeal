@@ -2,6 +2,7 @@ package com.marcinstramowski.socialmeal.screens.account.signIn
 
 import android.os.Bundle
 import com.jakewharton.rxbinding2.widget.textChanges
+import com.marcinstramowski.socialmeal.BuildConfig
 import com.marcinstramowski.socialmeal.R
 import com.marcinstramowski.socialmeal.screens.base.BaseFragment
 import com.marcinstramowski.socialmeal.screens.account.resetPassword.ResetPasswordFragment
@@ -28,6 +29,11 @@ class SignInFragment : BaseFragment<SignInContract.Presenter>(), SignInContract.
                 loginLogin.textChanges().map { it.toString() },
                 loginPassword.textChanges().map { it.toString() }
         )
+
+        if (BuildConfig.DEBUG) {
+            loginLogin.setText("debugLogin")
+            loginPassword.setText("debugPassword")
+        }
     }
 
     override fun setLoginButtonEnabled() {
@@ -39,11 +45,11 @@ class SignInFragment : BaseFragment<SignInContract.Presenter>(), SignInContract.
     }
 
     override fun showResetPasswordScreen() {
-        activityFragmentManager.changeFragment(ResetPasswordFragment())
+        activityFragmentManager.addFragmentToBackStack(ResetPasswordFragment())
     }
 
     override fun showSignUpScreen() {
-        activityFragmentManager.changeFragment(SignUpFragment())
+        activityFragmentManager.addFragmentToBackStack(SignUpFragment())
     }
 
     override fun showMainActivity() {

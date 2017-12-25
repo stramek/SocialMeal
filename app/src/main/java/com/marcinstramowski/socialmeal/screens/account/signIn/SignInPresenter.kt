@@ -49,7 +49,7 @@ class SignInPresenter @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { view.setSignInButtonProcessing() }
                 .doOnError { view.setSignInButtonProcessingFinished() }
-                .delay(2000, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
+                .delay(500, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
                 .subscribe(
                         { _ -> view.showMainActivity() },
                         { error -> e(error) }

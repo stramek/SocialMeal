@@ -28,7 +28,7 @@ class AccountActivity : BaseActivity<AccountContract.Presenter>(), AccountContra
 
     override fun onCreated(savedInstanceState: Bundle?) {
         setupBackground()
-        savedInstanceState ?: setFragment(SignInFragment())
+        savedInstanceState ?: setFragmentNoAnimation(SignInFragment())
     }
 
     private fun setupBackground() {

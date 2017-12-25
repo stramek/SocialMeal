@@ -43,18 +43,29 @@ abstract class BaseActivity<out T : BaseContract.Presenter> : DaggerAppCompatAct
         super.onDestroy()
     }
 
-    override fun <T : BaseFragment<*>> setFragment(fragment: T, containerId: Int) {
+    override fun <T : BaseFragment<*>> setFragmentNoAnimation(fragment: T, containerId: Int) {
         supportFragmentManager.beginTransaction().apply { replace(containerId, fragment) }.commit()
     }
 
-    override fun <T : BaseFragment<*>> changeFragment(fragment: T, containerId: Int) {
-        val backStateName = fragment.javaClass.name
-        val fragmentPopped = supportFragmentManager.popBackStackImmediate(backStateName, 0)
-        if (!fragmentPopped && supportFragmentManager.findFragmentByTag(backStateName) == null) {
+    override fun <T : BaseFragment<*>> setFragment(fragment: T, containerId: Int) {
+        val fragmentTag = fragment.javaClass.name
+        val fragmentNotExists = supportFragmentManager.findFragmentByTag(fragmentTag) == null
+        if (fragmentNotExists) {
             supportFragmentManager.beginTransaction().apply {
-                setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit)
-                replace(containerId, fragment, backStateName)
-                addToBackStack(backStateName)
+                setCustomAnimations(R.anim.enter_fade, R.anim.exit_fade)
+                replace(containerId, fragment, fragmentTag)
+            }.commit()
+        }
+    }
+
+    override fun <T : BaseFragment<*>> addFragmentToBackStack(fragment: T, containerId: Int) {
+        val fragmentTag = fragment.javaClass.name
+        val fragmentNotExists = supportFragmentManager.findFragmentByTag(fragmentTag) == null
+        if (fragmentNotExists) {
+            supportFragmentManager.beginTransaction().apply {
+                setCustomAnimations(R.anim.enter_fade, R.anim.exit_fade, R.anim.enter_fade, R.anim.exit_fade)
+                replace(containerId, fragment, fragmentTag)
+                addToBackStack(fragmentTag)
             }.commit()
         }
     }
