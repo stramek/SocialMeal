@@ -1,5 +1,7 @@
 package com.marcinstramowski.socialmeal
 
+import android.content.Context
+import android.support.multidex.MultiDex
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.marcinstramowski.socialmeal.di.DaggerAppComponent
 import com.squareup.leakcanary.LeakCanary
@@ -27,4 +29,8 @@ class SocialMealApplication : DaggerApplication() {
         return appComponent
     }
 
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
+    }
 }

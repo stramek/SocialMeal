@@ -1,23 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:textSize="50sp"
-        android:text="My Profile Fragment"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:paddingBottom="@dimen/margin_normal">
 
-</android.support.constraint.ConstraintLayout>
+        <ImageView
+            android:id="@+id/profileBackground"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profile_background_height"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_action_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileAvatar"
+            android:layout_width="@dimen/profile_avatar_size"
+            android:layout_height="@dimen/profile_avatar_size"
+            android:src="@drawable/ic_action_name"
+            app:layout_constraintBottom_toBottomOf="@id/profileBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profileBackground" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/profileLeftGuideLine"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/margin_big" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/profileRightGuideLine"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/margin_big" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/profileStreetCityGuideLine"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.6" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/profileName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:hint="@string/profile_name"
+            app:layout_constraintEnd_toEndOf="@id/profileRightGuideLine"
+            app:layout_constraintStart_toStartOf="@id/profileLeftGuideLine"
+            app:layout_constraintTop_toBottomOf="@id/profileAvatar">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/profileSurname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/profile_surname"
+            app:layout_constraintEnd_toEndOf="@id/profileRightGuideLine"
+            app:layout_constraintStart_toStartOf="@id/profileLeftGuideLine"
+            app:layout_constraintTop_toBottomOf="@id/profileName">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/profileStreet"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/profile_street"
+            app:layout_constraintEnd_toEndOf="@id/profileRightGuideLine"
+            app:layout_constraintStart_toStartOf="@id/profileLeftGuideLine"
+            app:layout_constraintTop_toBottomOf="@id/profileSurname">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/profileCity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/profile_city"
+            app:layout_constraintEnd_toEndOf="@id/profileStreetCityGuideLine"
+            app:layout_constraintStart_toStartOf="@id/profileLeftGuideLine"
+            app:layout_constraintTop_toBottomOf="@id/profileStreet">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/profilePostCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/profile_post_code"
+            app:layout_constraintEnd_toEndOf="@id/profileRightGuideLine"
+            app:layout_constraintStart_toStartOf="@id/profileStreetCityGuideLine"
+            app:layout_constraintTop_toBottomOf="@id/profileStreet">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.v7.widget.AppCompatButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_big"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@string/profile_save_changes"
+            app:layout_constraintEnd_toEndOf="@id/profileRightGuideLine"
+            app:layout_constraintStart_toStartOf="@id/profileLeftGuideLine"
+            app:layout_constraintTop_toBottomOf="@id/profilePostCode" />
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>
