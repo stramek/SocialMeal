@@ -43,10 +43,16 @@ abstract class BaseActivity<out T : BaseContract.Presenter> : DaggerAppCompatAct
         super.onDestroy()
     }
 
+    /**
+     * Sets (no back stack) passed [fragment] to view of assigned [containerId] without animation.
+     */
     override fun <T : BaseFragment<*>> setFragmentNoAnimation(fragment: T, containerId: Int) {
         supportFragmentManager.beginTransaction().apply { replace(containerId, fragment) }.commit()
     }
 
+    /**
+     * Sets (no back stack) passed [fragment] to view of assigned [containerId] with animation.
+     */
     override fun <T : BaseFragment<*>> setFragment(fragment: T, containerId: Int) {
         val fragmentTag = fragment.javaClass.name
         val fragmentNotExists = supportFragmentManager.findFragmentByTag(fragmentTag) == null
@@ -58,6 +64,9 @@ abstract class BaseActivity<out T : BaseContract.Presenter> : DaggerAppCompatAct
         }
     }
 
+    /**
+     * Sets (with back stack) passed [fragment] to view of assigned [containerId] with animation.
+     */
     override fun <T : BaseFragment<*>> addFragmentToBackStack(fragment: T, containerId: Int) {
         val fragmentTag = fragment.javaClass.name
         val fragmentNotExists = supportFragmentManager.findFragmentByTag(fragmentTag) == null
