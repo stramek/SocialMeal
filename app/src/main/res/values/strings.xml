@@ -1,11 +1,16 @@
 <resources>
     <string name="app_name">Social Meal</string>
 
+    <string name="logo_image_description">Logo image</string>
+
     <string name="register_test">Don\'t have an account? <b>Sign up</b></string>
     <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Password</string>
     <string name="login_sign_in_button">Sign in</string>
     <string name="login_forgot_password">Forgot password</string>
+    <string name="login_facebook_description">Login to facebook</string>
+    <string name="login_twitter_description">Login to twitter</string>
+    <string name="login_google_description">Login with google</string>
 
     <string name="sign_up_name">Name</string>
     <string name="sign_up_surname">Surname</string>
