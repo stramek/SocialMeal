@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/profile_background_height"
             android:scaleType="centerCrop"
-            android:src="@drawable/leak_canary_icon"
+            android:src="@drawable/ic_action_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +24,7 @@
             android:id="@+id/profileAvatar"
             android:layout_width="@dimen/profile_avatar_size"
             android:layout_height="@dimen/profile_avatar_size"
-            android:src="@drawable/leak_canary_icon"
+            android:src="@drawable/ic_action_name"
             app:layout_constraintBottom_toBottomOf="@id/profileBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
