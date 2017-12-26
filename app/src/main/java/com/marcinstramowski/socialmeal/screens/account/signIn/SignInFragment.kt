@@ -1,5 +1,6 @@
 package com.marcinstramowski.socialmeal.screens.account.signIn
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import com.jakewharton.rxbinding2.widget.textChanges
 import com.marcinstramowski.socialmeal.BuildConfig
@@ -29,7 +30,11 @@ class SignInFragment : BaseFragment<SignInContract.Presenter>(), SignInContract.
                 loginLogin.textChanges().map { it.toString() },
                 loginPassword.textChanges().map { it.toString() }
         )
+        setupDebugFields()
+    }
 
+    @SuppressLint("SetTextI18n")
+    private fun setupDebugFields() {
         if (BuildConfig.DEBUG) {
             loginLogin.setText("debugLogin")
             loginPassword.setText("debugPassword")
@@ -53,7 +58,7 @@ class SignInFragment : BaseFragment<SignInContract.Presenter>(), SignInContract.
     }
 
     override fun showMainActivity() {
-        activity.finish()
+        activity?.finish()
         startActivity<MainActivity>()
     }
 

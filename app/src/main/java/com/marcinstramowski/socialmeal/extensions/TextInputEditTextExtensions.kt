@@ -6,6 +6,6 @@ import android.support.v4.content.ContextCompat
 
 fun TextInputEditText.setErrorWithImage(errorText: String, @DrawableRes drawableRes: Int) {
     val errorImage = ContextCompat.getDrawable(context, drawableRes)
-    errorImage.setBounds(0, 0, errorImage.intrinsicWidth, errorImage.intrinsicHeight)
+    errorImage?.setBounds(0, 0, errorImage.intrinsicWidth, errorImage.intrinsicHeight)
     setError(errorText, errorImage)
 }

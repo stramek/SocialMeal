@@ -28,4 +28,6 @@
     <string name="profile_city">City</string>
     <string name="profile_post_code">Postcode</string>
     <string name="profile_save_changes">Save changes</string>
+    <string name="profile_background_image_description">Background image</string>
+    <string name="profile_background_avatar_description">User avatar</string>
 </resources>

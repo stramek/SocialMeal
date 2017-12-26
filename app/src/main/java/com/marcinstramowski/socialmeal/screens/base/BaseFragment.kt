@@ -26,7 +26,7 @@ abstract class BaseFragment<out T : BaseContract.Presenter> : DaggerFragment(), 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
             inflater.inflate(contentViewId, container, false)!!
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initActivityFragmentManager()
         onCreated(savedInstanceState)
