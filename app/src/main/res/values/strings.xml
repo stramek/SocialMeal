@@ -30,4 +30,12 @@
     <string name="profile_save_changes">Save changes</string>
     <string name="profile_background_image_description">Background image</string>
     <string name="profile_background_avatar_description">User avatar</string>
+
+    <string name="profile_sign_out">Sign out</string>
+    <string name="profile_personal_details">Personal details</string>
+    <string name="profile_account">Account</string>
+    <string name="profile_change_password">Change password</string>
+    <string name="profile_user_score">User score</string>
+    <string name="profile_about_me">About me</string>
+    <string name="profile_mock_score">4.98</string>
 </resources>

@@ -10,10 +10,14 @@ class ProfilePresenter @Inject constructor(
 ) : ProfileContract.Presenter {
 
     override fun onCreate() {
-
+        view.setUserAvatar("www.asd/sample_image.png")
     }
 
     override fun onDestroy() {
 
+    }
+
+    override fun onSignOutButtonPressed() {
+        view.signOut()
     }
 }
