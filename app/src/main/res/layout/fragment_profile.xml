@@ -178,29 +178,13 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:drawablePadding="@dimen/margin_tiny"
-                    android:drawableStart="@drawable/ic_arrow"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:text="@string/profile_change_password"
-                    android:textSize="16sp" />
+                    style="@style/ProfileOptionsButton"
+                    android:text="@string/profile_change_password" />
 
                 <TextView
                     android:id="@+id/profile_sign_out"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:drawablePadding="@dimen/margin_tiny"
-                    android:drawableStart="@drawable/ic_arrow"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:text="@string/profile_sign_out"
-                    android:textSize="16sp" />
+                    style="@style/ProfileOptionsButton"
+                    android:text="@string/profile_sign_out" />
 
             </LinearLayout>
 
