@@ -7,10 +7,11 @@ import com.marcinstramowski.socialmeal.screens.base.BaseContract
  */
 interface ProfileContract {
     interface View : BaseContract.View<Presenter> {
-
+        fun setUserAvatar(avatarUrl: String)
+        fun signOut()
     }
 
     interface Presenter : BaseContract.Presenter {
-
+        fun onSignOutButtonPressed()
     }
 }
