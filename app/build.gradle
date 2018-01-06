@@ -26,6 +26,7 @@ android {
             buildConfigField 'String', 'API_URL', '"https://google.pl"'
         }
     }
+    dataBinding.enabled true
 }
 
 dependencies {
@@ -47,7 +48,7 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:2.13"
     kapt "com.google.dagger:dagger-android-processor:2.13"
 
-    //RxJava
+    // RxJava
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
     implementation 'com.jakewharton.rxbinding2:rxbinding-kotlin:2.0.0'
@@ -63,24 +64,36 @@ dependencies {
     // Permissions
     implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
 
-    // useful extensions
+    // Useful extensions
     implementation "org.jetbrains.anko:anko-common:0.10.3"
     implementation "org.jetbrains.anko:anko-design:0.10.3"
     implementation "org.jetbrains.anko:anko-support-v4-commons:0.10.3"
 
-    // leak detection
+    // Leak detection
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 
+    // Java 8 time port
     implementation 'com.jakewharton.threetenabp:threetenabp:1.0.5'
 
+    // Log
     implementation 'com.jakewharton.timber:timber:4.6.0'
     implementation 'com.github.ajalt:timberkt:1.3.0'
+
+    // Circle image
     implementation 'de.hdodenhof:circleimageview:2.2.0'
 
+    // Multi dex
     implementation 'com.android.support:multidex:1.0.2'
 
+    // Image loader
     implementation 'com.github.bumptech.glide:glide:4.4.0'
     kapt 'com.github.bumptech.glide:compiler:4.4.0'
     implementation 'jp.wasabeef:glide-transformations:3.0.1'
+
+    // Generic data binding adapter for RecyclerView
+    compile 'com.github.nitrico.lastadapter:lastadapter:2.3.0'
+
+    // Data binding compiler
+    kapt 'com.android.databinding:compiler:3.0.1'
 }
