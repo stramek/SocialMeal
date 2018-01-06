@@ -58,8 +58,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-moshi:2.3.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
     testImplementation 'com.squareup.okhttp3:mockwebserver:3.9.1'
-    implementation 'com.squareup.moshi:moshi:1.5.0'
-    implementation 'com.squareup.moshi:moshi-kotlin:1.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
 
     // Permissions
     implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'

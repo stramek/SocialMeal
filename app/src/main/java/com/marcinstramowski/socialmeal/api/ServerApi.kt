@@ -1,5 +1,6 @@
 package com.marcinstramowski.socialmeal.api
 
+import com.google.gson.GsonBuilder
 import com.marcinstramowski.socialmeal.BuildConfig
 import com.marcinstramowski.socialmeal.api.auth.model.Token
 import io.reactivex.Single
@@ -11,8 +12,7 @@ import retrofit2.http.*
 import com.marcinstramowski.socialmeal.api.auth.ApiAuthenticator
 import com.marcinstramowski.socialmeal.api.auth.AuthHeaderInterceptor
 import com.marcinstramowski.socialmeal.api.auth.model.RefreshTokenRequest
-import com.squareup.moshi.Moshi
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 /**
@@ -87,15 +87,15 @@ interface ServerApi {
         private fun fromRetrofit(userOkHttp: OkHttpClient): Retrofit {
             return Retrofit.Builder()
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .addConverterFactory(MoshiConverterFactory.create(getMoshiObjectMapper()))
+                    .addConverterFactory(GsonConverterFactory.create(getGsonObjectMapper()))
                     .baseUrl(BuildConfig.API_URL)
                     .client(userOkHttp)
                     .build()
         }
 
         /**
-         * Builder for Json Moshi parser
+         * Builder for Gson parser
          */
-        private fun getMoshiObjectMapper() = Moshi.Builder().build()
+        private fun getGsonObjectMapper() = GsonBuilder().create()
     }
 }
