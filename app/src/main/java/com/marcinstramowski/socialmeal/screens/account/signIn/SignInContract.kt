@@ -11,10 +11,8 @@ interface SignInContract {
         fun showResetPasswordScreen()
         fun showSignUpScreen()
         fun showMainActivity()
-        fun setSignInButtonProcessing()
-        fun setSignInButtonProcessingFinished()
-        fun setLoginButtonEnabled()
-        fun setLoginButtonDisabled()
+        fun setSignInButtonProcessing(processing: Boolean)
+        fun setSignInButtonEnabled(enabled: Boolean)
     }
 
     interface Presenter : BaseContract.Presenter {

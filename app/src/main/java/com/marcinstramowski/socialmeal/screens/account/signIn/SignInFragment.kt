@@ -2,6 +2,7 @@ package com.marcinstramowski.socialmeal.screens.account.signIn
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import com.github.ajalt.timberkt.e
 import com.jakewharton.rxbinding2.widget.textChanges
 import com.marcinstramowski.socialmeal.BuildConfig
 import com.marcinstramowski.socialmeal.R
@@ -23,7 +24,7 @@ class SignInFragment : BaseFragment<SignInContract.Presenter>(), SignInContract.
     override val contentViewId = R.layout.fragment_sign_in
 
     override fun onCreated(savedInstanceState: Bundle?) {
-        loginProgressButton.setOnClickListener { presenter.onSignInButtonClick() }
+        signInProgressButton.setOnClickListener { presenter.onSignInButtonClick() }
         resetPasswordButton.setOnClickListener { presenter.onResetPasswordClick() }
         signUpButton.setOnClickListener { presenter.onSignUpButtonClick() }
         presenter.observeFieldsChanges(
@@ -41,12 +42,8 @@ class SignInFragment : BaseFragment<SignInContract.Presenter>(), SignInContract.
         }
     }
 
-    override fun setLoginButtonEnabled() {
-        loginProgressButton.setEnabled()
-    }
-
-    override fun setLoginButtonDisabled() {
-        loginProgressButton.setDisabled()
+    override fun setSignInButtonEnabled(enabled: Boolean) {
+        signInProgressButton.isEnabled = enabled
     }
 
     override fun showResetPasswordScreen() {
@@ -62,11 +59,7 @@ class SignInFragment : BaseFragment<SignInContract.Presenter>(), SignInContract.
         startActivity<MainActivity>()
     }
 
-    override fun setSignInButtonProcessing() {
-        loginProgressButton.setProcessing()
-    }
-
-    override fun setSignInButtonProcessingFinished() {
-        loginProgressButton.setProcessingFinished()
+    override fun setSignInButtonProcessing(processing: Boolean) {
+        signInProgressButton.setProcessing(processing)
     }
 }

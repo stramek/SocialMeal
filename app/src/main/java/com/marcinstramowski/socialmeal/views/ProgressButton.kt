@@ -29,26 +29,16 @@ class ProgressButton(context: Context, attrs: AttributeSet?) : FrameLayout(conte
         button.text = buttonText
     }
 
-    fun setDisabled() {
-        button.isEnabled = false
-        button.setTextColor(ContextCompat.getColor(context, R.color.account_button_disabled_color))
+    override fun setEnabled(enabled: Boolean) {
+        button.isEnabled = enabled
+        val color = if (enabled) R.color.account_enabled_color else R.color.account_button_disabled_color
+        button.setTextColor(ContextCompat.getColor(context, color))
     }
 
-    fun setEnabled() {
-        button.isEnabled = true
-        button.setTextColor(ContextCompat.getColor(context, R.color.account_enabled_color))
-    }
-
-    fun setProcessing() {
-        button.text = null
-        progressBar.visibility = View.VISIBLE
-        setDisabled()
-    }
-
-    fun setProcessingFinished() {
-        button.text = buttonText
-        progressBar.visibility = View.INVISIBLE
-        setEnabled()
+    fun setProcessing(processing: Boolean) {
+        button.text = if (processing) null else buttonText
+        progressBar.visibility = if (processing) View.VISIBLE else View.INVISIBLE
+        isEnabled = !processing
     }
 
     override fun setOnClickListener(l: OnClickListener?) {

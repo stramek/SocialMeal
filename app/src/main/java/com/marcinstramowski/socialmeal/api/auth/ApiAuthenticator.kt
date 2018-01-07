@@ -9,7 +9,7 @@ import okhttp3.Response
 import okhttp3.Route
 import retrofit2.HttpException
 import com.marcinstramowski.socialmeal.api.auth.AuthHeaderInterceptor.Companion.AUTHORIZATION_HEADER
-import com.marcinstramowski.socialmeal.api.auth.model.RefreshTokenRequest
+import com.marcinstramowski.socialmeal.model.RefreshTokenRequest
 import javax.inject.Inject
 
 /**

@@ -16,6 +16,10 @@
     <string name="sign_up_surname">Surname</string>
     <string name="sign_up_confirm_password">Confirm password</string>
     <string name="sign_up_sign_up_button">Sign up</string>
+    <string name="sign_up_invalid_email">Invalid email.</string>
+    <string name="sign_up_invalid_password">Password must contain at least 6 characters including number.</string>
+    <string name="sign_up_passwords_do_not_match">Passwords don\'t match.</string>
+    <string name="sign_up_field_cannot_be_empty">This field cannot be empty.</string>
 
     <string name="remind_password_reset">Reset password</string>
 
@@ -38,4 +42,12 @@
     <string name="profile_user_score">User score</string>
     <string name="profile_about_me">About me</string>
     <string name="profile_mock_score">4.98</string>
+
+    <string name="timeout_exception">Server is taking too long to respond</string>
+    <string name="unknown_host_exception">Couldn\'t connect to a server</string>
+    <string name="unknown_exception">An unknown error has occurred</string>
+    <string name="unknown_http_exception">An unknown network error has occurred</string>
+    <string name="http_error_500">Something wrong with server</string>
+    <string name="email_is_taken">Email is already taken</string>
+
 </resources>

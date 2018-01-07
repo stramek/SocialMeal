@@ -21,10 +21,10 @@ class ResetPasswordFragment : BaseFragment<ResetPasswordContract.Presenter>(), R
     }
 
     override fun setResetButtonEnabled() {
-        resetProgressButton.setEnabled()
+        resetProgressButton.isEnabled = true
     }
 
     override fun setResetButtonDisabled() {
-        resetProgressButton.setDisabled()
+        resetProgressButton.isEnabled = false
     }
 }
