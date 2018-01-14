@@ -6,9 +6,11 @@ import com.marcinstramowski.socialmeal.R
 import com.marcinstramowski.socialmeal.extensions.setCompatError
 import com.marcinstramowski.socialmeal.model.SignUpFormFields
 import com.marcinstramowski.socialmeal.screens.base.BaseFragment
+import com.marcinstramowski.socialmeal.screens.main.MainActivity
 import io.reactivex.Observable
 import io.reactivex.functions.Function5
 import kotlinx.android.synthetic.main.fragment_sign_up.*
+import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
@@ -51,6 +53,11 @@ class SignUpFragment : BaseFragment<SignUpContract.Presenter>(), SignUpContract.
 
     override fun showInvalidEmailMessage(visible: Boolean) {
         signUpEmail.setCompatError(if (visible) R.string.sign_up_invalid_email else null)
+    }
+
+    override fun showMainActivity() {
+        activity?.finish()
+        startActivity<MainActivity>()
     }
 
     override fun showInvalidPasswordMessage(visible: Boolean) {

@@ -7,7 +7,10 @@ import com.github.ajalt.timberkt.i
 import com.jakewharton.rxbinding2.widget.checkedChanges
 import com.jakewharton.rxbinding2.widget.textChanges
 import com.marcinstramowski.socialmeal.R
+import com.marcinstramowski.socialmeal.account.UserPrefsDataSource
 import com.marcinstramowski.socialmeal.api.ServerApi
+import com.marcinstramowski.socialmeal.model.SignInRequest
+import com.marcinstramowski.socialmeal.model.SignInResponse
 import com.marcinstramowski.socialmeal.model.SignUpFormFields
 import com.marcinstramowski.socialmeal.model.SignUpRequest
 import com.marcinstramowski.socialmeal.utils.DeviceInfo
@@ -24,7 +27,8 @@ import javax.inject.Inject
 class SignUpPresenter @Inject constructor(
         private val view: SignUpContract.View,
         private val userApi: ServerApi.ManagementApi,
-        private val deviceInfo: DeviceInfo
+        private val deviceInfo: DeviceInfo,
+        private val userPrefsDataSource: UserPrefsDataSource
 ) : SignUpContract.Presenter {
 
     private val compositeDisposable = CompositeDisposable()
@@ -39,12 +43,14 @@ class SignUpPresenter @Inject constructor(
     override fun onSignUpButtonClick(fields: SignUpFormFields) {
         compositeDisposable.add(
                 userApi.signUp(SignUpRequest(fields.firstname, fields.surname, fields.email, fields.password))
+                        .andThen(userApi.signIn(SignInRequest(fields.email, fields.password, deviceInfo.deviceId, deviceInfo.deviceName)))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
+                        .doOnSuccess { userPrefsDataSource.saveTokens(it) }
                         .doOnSubscribe { view.setSignUpButtonProcessing(true) }
                         .doAfterTerminate { view.setSignUpButtonProcessing(false) }
                         .subscribe(
-                                { i { "Registration success" } },
+                                { view.showMainActivity() },
                                 { error ->
                                     view.showErrorMessage(getNetworkErrorMessage(error))
                                     e(error)

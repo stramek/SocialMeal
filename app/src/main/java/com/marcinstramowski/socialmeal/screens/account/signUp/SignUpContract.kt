@@ -22,6 +22,8 @@ interface SignUpContract {
         fun showInvalidPasswordMessage(visible: Boolean)
 
         fun showPasswordsDontMatchMessage(visible: Boolean)
+
+        fun showMainActivity()
     }
 
     interface Presenter : BaseContract.Presenter {
