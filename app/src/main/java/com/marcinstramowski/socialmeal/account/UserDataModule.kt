@@ -9,7 +9,6 @@ import dagger.Module
 @Module
 interface UserDataModule {
 
-    @Binds
-    fun bindUserDataSrouce(repo: UserPrefsRepo): UserPrefsDataSource
+    @Binds fun bindUserDataSrouce(repo: UserPrefsRepo): UserPrefsDataSource
 
 }

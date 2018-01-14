@@ -2,6 +2,10 @@ package com.marcinstramowski.socialmeal.di
 
 import android.app.Application
 import android.content.Context
+import com.marcinstramowski.socialmeal.account.DataValidatorRepo
+import com.marcinstramowski.socialmeal.account.DataValidatorSource
+import com.marcinstramowski.socialmeal.rxSchedulers.AppSchedulerProvider
+import com.marcinstramowski.socialmeal.rxSchedulers.SchedulerProvider
 import dagger.Binds
 import dagger.Module
 
@@ -14,4 +18,8 @@ import dagger.Module
 abstract class ApplicationModule {
 
     @Binds internal abstract fun bindContext(application: Application): Context
+
+    @Binds internal abstract fun bindProvider(provider: AppSchedulerProvider): SchedulerProvider
+
+    @Binds internal abstract fun bindDataValidator(dataValidatorRepo: DataValidatorRepo): DataValidatorSource
 }
