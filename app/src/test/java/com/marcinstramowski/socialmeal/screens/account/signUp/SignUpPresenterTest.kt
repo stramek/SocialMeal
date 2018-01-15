@@ -1,6 +1,6 @@
 package com.marcinstramowski.socialmeal.screens.account.signUp
 
-import com.marcinstramowski.socialmeal.account.DataValidatorSource
+import com.marcinstramowski.socialmeal.account.DataValidator
 import com.marcinstramowski.socialmeal.account.UserPrefsDataSource
 import com.marcinstramowski.socialmeal.api.ServerApi
 import com.marcinstramowski.socialmeal.model.SignInResponse
@@ -26,7 +26,6 @@ class SignUpPresenterTest {
     private val deviceInfo = DeviceInfo("DeviceId", "DeviceName")
     private val userPrefs = mock<UserPrefsDataSource>()
     private val managementApi = mock<ServerApi.ManagementApi>()
-    private val dataValidator = mock<DataValidatorSource>()
 
     val scheduler = TestScheduler()
 
@@ -37,7 +36,7 @@ class SignUpPresenterTest {
 
     @Before
     fun prepareTest() {
-        presenter = SignUpPresenter(view, managementApi, deviceInfo, userPrefs, dataValidator, TrampolineSchedulerProvider())
+        presenter = SignUpPresenter(view, managementApi, deviceInfo, userPrefs, DataValidator(), TrampolineSchedulerProvider())
     }
 
     @Test
@@ -97,11 +96,6 @@ class SignUpPresenterTest {
     @Test
     fun disableRegisterButtonWhenFieldsAreEmpty() {
 
-        dataValidator.stub {
-            on { isEmailValid(any()) } doReturn true
-            on { isPasswordValid(any()) } doReturn true
-        }
-
         presenter.observeFieldsChanges(signUpFields(firstName = ""))
         presenter.observeFieldsChanges(signUpFields(surname = ""))
         presenter.observeFieldsChanges(signUpFields(email = ""))
@@ -113,6 +107,84 @@ class SignUpPresenterTest {
         inOrder(view) {
             verify(view, times(5)).setSignUpButtonEnabled(false)
             verify(view).setSignUpButtonEnabled(true)
+        }
+    }
+
+    @Test
+    fun disableRegisterButtonWhenEmailIsInvalid() {
+        presenter.observeFieldsChanges(signUpFields(email = "test.com")) // not valid
+        presenter.observeFieldsChanges(signUpFields(email = "@test.com")) // not valid
+        presenter.observeFieldsChanges(signUpFields(email = "a@test.")) // not valid
+        presenter.observeFieldsChanges(signUpFields(email = "test.test@")) // not valid
+        presenter.observeFieldsChanges(signUpFields(email = "test@test.com")) // valid
+
+        inOrder(view) {
+            verify(view, times(4)).setSignUpButtonEnabled(false)
+            verify(view, times(1)).setSignUpButtonEnabled(true)
+        }
+    }
+
+    @Test
+    fun disableRegisterButtonWhenPasswordIsInvalid() {
+        presenter.observeFieldsChanges(signUpFields(password = "aaaaa", confirmPassword = "aaaaa")) // too short, no number
+        presenter.observeFieldsChanges(signUpFields(password = "aaaa1", confirmPassword = "aaaa1")) // too short
+        presenter.observeFieldsChanges(signUpFields(password = "11111", confirmPassword = "11111")) // too short, no letter
+        presenter.observeFieldsChanges(signUpFields(password = "1111a", confirmPassword = "1111a")) // too short
+        presenter.observeFieldsChanges(signUpFields(password = "aaa1!!", confirmPassword = "aaa1!!")) // valid
+        presenter.observeFieldsChanges(signUpFields(password = "1aaaaa", confirmPassword = "1aaaaa")) // valid
+
+        inOrder(view) {
+            verify(view, times(4)).setSignUpButtonEnabled(false)
+            verify(view, times(2)).setSignUpButtonEnabled(true)
+        }
+    }
+
+    @Test
+    fun disableRegisterButtonWhenPasswordsNotMatchIsInvalid() {
+        presenter.observeFieldsChanges(signUpFields(password = "aaa1!!", confirmPassword = "aaa1!!!"))
+        presenter.observeFieldsChanges(signUpFields(password = "1aaaaa", confirmPassword = "1aaaaaz"))
+        presenter.observeFieldsChanges(signUpFields(password = "@1aaaaa", confirmPassword = "1aaaaa"))
+        presenter.observeFieldsChanges(signUpFields(password = "1aa@aaa", confirmPassword = "1aa@aaa"))
+
+        inOrder(view) {
+            verify(view, times(3)).setSignUpButtonEnabled(false)
+            verify(view, times(1)).setSignUpButtonEnabled(true)
+        }
+    }
+
+    @Test
+    fun showErrorMessageWhenPasswordsDontMatch() {
+        presenter.observeFieldsChanges(signUpFields(password = "pass", confirmPassword = "pass"))
+        presenter.observeFieldsChanges(signUpFields(password = "pass", confirmPassword = ""))
+        presenter.observeFieldsChanges(signUpFields(password = "pass", confirmPassword = "pass2"))
+        presenter.observeFieldsChanges(signUpFields(password = "", confirmPassword = "pass2"))
+
+        inOrder(view) {
+            verify(view, times(2)).showPasswordsDontMatchMessage(visible = false)
+            verify(view, times(2)).showPasswordsDontMatchMessage(visible = true)
+        }
+    }
+
+    @Test
+    fun showErrorMessageWhenPasswordIsInvalid() {
+        presenter.observeFieldsChanges(signUpFields(password = "aaa"))
+        presenter.observeFieldsChanges(signUpFields(password = "aaaaa1"))
+        presenter.observeFieldsChanges(signUpFields(password = "")) // don't show message when empty
+
+        inOrder(view) {
+            verify(view).showInvalidPasswordMessage(visible = true)
+            verify(view, times(2)).showInvalidPasswordMessage(visible = false)
+        }
+    }
+
+    @Test
+    fun showErrorMessageWhenEmailIsInvalid() {
+        presenter.observeFieldsChanges(signUpFields(email = "aaa"))
+        presenter.observeFieldsChanges(signUpFields(email = "test@gmail.com"))
+
+        inOrder(view) {
+            verify(view).showInvalidEmailMessage(visible = true)
+            verify(view).showInvalidEmailMessage(visible = false)
         }
     }
 

@@ -2,7 +2,7 @@ package com.marcinstramowski.socialmeal.screens.account.signUp
 
 import com.github.ajalt.timberkt.e
 import com.marcinstramowski.socialmeal.R
-import com.marcinstramowski.socialmeal.account.DataValidatorSource
+import com.marcinstramowski.socialmeal.account.DataValidator
 import com.marcinstramowski.socialmeal.account.UserPrefsDataSource
 import com.marcinstramowski.socialmeal.api.ServerApi
 import com.marcinstramowski.socialmeal.model.SignInRequest
@@ -22,7 +22,7 @@ class SignUpPresenter @Inject constructor(
         private val userApi: ServerApi.ManagementApi,
         private val deviceInfo: DeviceInfo,
         private val userPrefsDataSource: UserPrefsDataSource,
-        private val dataValidatorSource: DataValidatorSource,
+        private val dataValidator: DataValidator,
         private val schedulers: SchedulerProvider
 ) : SignUpContract.Presenter {
 
@@ -66,8 +66,8 @@ class SignUpPresenter @Inject constructor(
 
         val fieldsNotEmpty = name.isNotBlank() && surname.isNotBlank() && email.isNotBlank() && password.isNotBlank()
         val passwordsMatch = password == confirmPassword
-        val passwordValid = dataValidatorSource.isPasswordValid(password)
-        val emailValid = dataValidatorSource.isEmailValid(email)
+        val passwordValid = dataValidator.isPasswordValid(password)
+        val emailValid = dataValidator.isEmailValid(email)
         val fieldsValid = fieldsNotEmpty && passwordsMatch && passwordValid && emailValid
 
         view.showPasswordsDontMatchMessage(confirmPassword.isNotBlank() && !passwordsMatch)
