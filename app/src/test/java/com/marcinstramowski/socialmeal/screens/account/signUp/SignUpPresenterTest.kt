@@ -11,7 +11,6 @@ import com.marcinstramowski.socialmeal.utils.DeviceInfo
 import com.nhaarman.mockito_kotlin.*
 import io.reactivex.Completable
 import io.reactivex.Single
-import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Test
 
@@ -26,8 +25,6 @@ class SignUpPresenterTest {
     private val deviceInfo = DeviceInfo("DeviceId", "DeviceName")
     private val userPrefs = mock<UserPrefsDataSource>()
     private val managementApi = mock<ServerApi.ManagementApi>()
-
-    val scheduler = TestScheduler()
 
     private val sampleSignUpFields = SignUpFormFields("name", "surname",
             "email", "pass", "pass")
