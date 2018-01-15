@@ -78,7 +78,7 @@
             app:layout_constraintTop_toBottomOf="@+id/loginLogin" />
 
         <com.marcinstramowski.socialmeal.views.ProgressButton
-            android:id="@+id/loginProgressButton"
+            android:id="@+id/signInProgressButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_normal"
@@ -95,7 +95,7 @@
             android:layout_marginTop="@dimen/margin_tiny"
             android:text="@string/login_forgot_password"
             app:layout_constraintEnd_toEndOf="@id/loginRightGuideLine"
-            app:layout_constraintTop_toBottomOf="@id/loginProgressButton" />
+            app:layout_constraintTop_toBottomOf="@id/signInProgressButton" />
 
 
         <ImageButton

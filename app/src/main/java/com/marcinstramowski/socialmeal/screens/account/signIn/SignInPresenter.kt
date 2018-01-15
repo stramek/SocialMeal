@@ -32,12 +32,7 @@ class SignInPresenter @Inject constructor(
         compositeDisposable.add(isSignInEnabled
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { fieldsFilled ->
-                            when (fieldsFilled) {
-                                true -> view.setLoginButtonEnabled()
-                                false -> view.setLoginButtonDisabled()
-                            }
-                        },
+                        { fieldsFilled -> view.setSignInButtonEnabled(fieldsFilled) },
                         { error -> e(error) }
                 )
         )
@@ -47,9 +42,9 @@ class SignInPresenter @Inject constructor(
         compositeDisposable.add(Single.just(1)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { view.setSignInButtonProcessing() }
-                .doOnError { view.setSignInButtonProcessingFinished() }
-                .delay(500, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
+                .doOnSubscribe { view.setSignInButtonProcessing(true) }
+                .doOnError { view.setSignInButtonProcessing(false) }
+                .delay(1000, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
                 .subscribe(
                         { _ -> view.showMainActivity() },
                         { error -> e(error) }

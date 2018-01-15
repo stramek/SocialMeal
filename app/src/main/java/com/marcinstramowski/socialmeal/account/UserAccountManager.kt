@@ -12,15 +12,7 @@ class UserAccountManager @Inject constructor(private val userPrefs: UserPrefsDat
     /**
      * Voids user access tokens
      */
-    fun logoutUser() {
-        userPrefs.accessToken = null
-        userPrefs.refreshToken = null
-    }
-
-    /**
-     *  Determines if application should omit login screen and take user straight to [MainActivity]
-     */
-    fun shouldAutoLogUser() = userPrefs.refreshToken != null && userPrefs.rememberMe
+    fun logoutUser() = userPrefs.logoutUser()
 
     /**
      * Determines if user it logged to the application

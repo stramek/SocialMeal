@@ -2,6 +2,7 @@ package com.marcinstramowski.socialmeal.di
 
 import android.app.Application
 import com.marcinstramowski.socialmeal.SocialMealApplication
+import com.marcinstramowski.socialmeal.account.UserDataModule
 import com.marcinstramowski.socialmeal.api.ApiModule
 import dagger.BindsInstance
 import dagger.Component
@@ -10,20 +11,13 @@ import dagger.android.DaggerApplication
 import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
-/**
- * This is a Dagger component. Refer to [SocialMealApplication] for the list of Dagger components
- * used in this application.
- *
- * Even though Dagger allows annotating a [Component] as a singleton, the code
- * itself must ensure only one instance of the class is created. This is done in [AndroidSupportInjectionModule].
- * is the module from Dagger.Android that helps with the generation and location of subcomponents.
- */
 @Singleton
 @Component(modules = arrayOf(
         ApplicationModule::class,
         ActivityBindingModule::class,
         FragmentBindingModule::class,
         AndroidSupportInjectionModule::class,
+        UserDataModule::class,
         ApiModule::class)
 )
 interface AppComponent : AndroidInjector<DaggerApplication> {

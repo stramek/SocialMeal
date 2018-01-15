@@ -2,7 +2,6 @@ package com.marcinstramowski.socialmeal.api
 
 import com.google.gson.GsonBuilder
 import com.marcinstramowski.socialmeal.BuildConfig
-import com.marcinstramowski.socialmeal.api.auth.model.Token
 import io.reactivex.Single
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -11,7 +10,8 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.http.*
 import com.marcinstramowski.socialmeal.api.auth.ApiAuthenticator
 import com.marcinstramowski.socialmeal.api.auth.AuthHeaderInterceptor
-import com.marcinstramowski.socialmeal.api.auth.model.RefreshTokenRequest
+import com.marcinstramowski.socialmeal.model.*
+import io.reactivex.Completable
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
@@ -25,7 +25,13 @@ interface ServerApi {
      */
     interface ManagementApi {
 
-        @POST("token/refresh")
+        @POST("account/register")
+        fun signUp(@Body signUpRequest: SignUpRequest): Completable
+
+        @POST("account/login")
+        fun signIn(@Body signInRequest: SignInRequest): Single<SignInResponse>
+
+        @POST("account/refreshToken")
         fun refreshToken(@Body refreshTokenRequest: RefreshTokenRequest): Single<Token>
     }
 

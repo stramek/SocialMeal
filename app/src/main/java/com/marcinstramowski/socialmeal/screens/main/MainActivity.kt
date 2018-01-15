@@ -1,7 +1,9 @@
 package com.marcinstramowski.socialmeal.screens.main
 
 import android.os.Bundle
+import com.github.ajalt.timberkt.e
 import com.marcinstramowski.socialmeal.R
+import com.marcinstramowski.socialmeal.account.UserPrefsDataSource
 import com.marcinstramowski.socialmeal.screens.base.BaseActivity
 import com.marcinstramowski.socialmeal.screens.main.myEvents.MyEventsFragment
 import com.marcinstramowski.socialmeal.screens.main.profile.ProfileFragment
@@ -10,6 +12,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
+
+    @Inject lateinit var test: UserPrefsDataSource
 
     @Inject override lateinit var presenter: MainContract.Presenter
     override val contentViewId = R.layout.activity_main
