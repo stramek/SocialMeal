@@ -1,5 +1,7 @@
 package com.marcinstramowski.socialmeal.screens.account.signIn
 
+import android.support.annotation.StringRes
+import com.marcinstramowski.socialmeal.model.SignInFormFields
 import com.marcinstramowski.socialmeal.screens.base.BaseContract
 import io.reactivex.Observable
 
@@ -8,17 +10,34 @@ import io.reactivex.Observable
  */
 interface SignInContract {
     interface View : BaseContract.View<Presenter> {
+
         fun showResetPasswordScreen()
+
         fun showSignUpScreen()
+
         fun showMainActivity()
+
         fun setSignInButtonProcessing(processing: Boolean)
+
         fun setSignInButtonEnabled(enabled: Boolean)
+
+        fun showErrorMessage(@StringRes stringId: Int)
     }
 
     interface Presenter : BaseContract.Presenter {
-        fun onSignInButtonClick()
-        fun onResetPasswordClick()
+
         fun onSignUpButtonClick()
+
+        fun onResetPasswordClick()
+
+        fun onSignInButtonClick(fields: SignInFormFields)
+
+        fun onSignInWithFacebookClick()
+
+        fun onSignInWithTwitterClick()
+
+        fun onSignInWithGoogleClick()
+
         fun observeFieldsChanges(emailField: Observable<String>, passwordField: Observable<String>)
     }
 }

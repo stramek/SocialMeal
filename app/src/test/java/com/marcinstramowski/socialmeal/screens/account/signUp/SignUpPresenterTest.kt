@@ -28,7 +28,7 @@ class SignUpPresenterTest {
 
     private val sampleSignUpFields = SignUpFormFields("name", "surname",
             "email", "pass", "pass")
-    private val loginResponse = SignInResponse(Token("accessToken", 0),
+    private val signInResponse = SignInResponse(Token("accessToken", 0),
             Token("refreshToken", 0))
 
     @Before
@@ -41,13 +41,13 @@ class SignUpPresenterTest {
 
         managementApi.stub {
             on { signUp(any()) } doReturn Completable.complete()
-            on { signIn(any()) } doReturn Single.just(loginResponse)
+            on { signIn(any()) } doReturn Single.just(signInResponse)
         }
 
         presenter.onSignUpButtonClick(sampleSignUpFields)
 
         verify(view).setSignUpButtonProcessing(true)
-        verify(userPrefs).saveTokens(loginResponse)
+        verify(userPrefs).saveTokens(signInResponse)
         verify(view).showMainActivity()
         verify(view).setSignUpButtonProcessing(false)
 
@@ -59,7 +59,7 @@ class SignUpPresenterTest {
 
         managementApi.stub {
             on { signUp(any()) } doReturn Completable.error(Throwable())
-            on { signIn(any()) } doReturn Single.just(loginResponse)
+            on { signIn(any()) } doReturn Single.just(signInResponse)
         }
 
         presenter.onSignUpButtonClick(sampleSignUpFields)
@@ -68,7 +68,7 @@ class SignUpPresenterTest {
         verify(view).showErrorMessage(any())
         verify(view).setSignUpButtonProcessing(false)
 
-        verify(userPrefs, never()).saveTokens(loginResponse)
+        verify(userPrefs, never()).saveTokens(signInResponse)
         verify(view, never()).showMainActivity()
     }
 
@@ -86,7 +86,7 @@ class SignUpPresenterTest {
         verify(view).showErrorMessage(any())
         verify(view).setSignUpButtonProcessing(false)
 
-        verify(userPrefs, never()).saveTokens(loginResponse)
+        verify(userPrefs, never()).saveTokens(signInResponse)
         verify(view, never()).showMainActivity()
     }
 

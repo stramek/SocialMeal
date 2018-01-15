@@ -19,7 +19,7 @@ import javax.inject.Inject
  */
 class SignUpPresenter @Inject constructor(
         private val view: SignUpContract.View,
-        private val userApi: ServerApi.ManagementApi,
+        private val managementApi: ServerApi.ManagementApi,
         private val deviceInfo: DeviceInfo,
         private val userPrefsDataSource: UserPrefsDataSource,
         private val dataValidator: DataValidator,
@@ -37,12 +37,13 @@ class SignUpPresenter @Inject constructor(
 
     override fun onSignUpButtonClick(fields: SignUpFormFields) {
         compositeDisposable.add(
-                userApi.signUp(SignUpRequest(fields.firstname, fields.surname, fields.email, fields.password))
-                        .andThen(userApi.signIn(SignInRequest(fields.email, fields.password,
+                managementApi.signUp(SignUpRequest(fields.firstname, fields.surname, fields.email, fields.password))
+                        .andThen(managementApi.signIn(SignInRequest(fields.email, fields.password,
                                 deviceInfo.deviceId, deviceInfo.deviceName)))
                         .subscribeOn(schedulers.io())
-                        .observeOn(schedulers.ui())
+                        .observeOn(schedulers.io())
                         .doOnSuccess { userPrefsDataSource.saveTokens(it) }
+                        .observeOn(schedulers.ui())
                         .doOnSubscribe { view.setSignUpButtonProcessing(true) }
                         .doAfterTerminate { view.setSignUpButtonProcessing(false) }
                         .subscribe(
