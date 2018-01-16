@@ -99,42 +99,42 @@
 
 
         <ImageButton
-            android:id="@+id/sign_in_facebook_button"
+            android:id="@+id/signInFacebookButton"
             android:layout_width="@dimen/login_social_button_size"
             android:layout_height="@dimen/login_social_button_size"
             android:layout_marginTop="@dimen/margin_normal"
             android:background="@drawable/button_social_selector"
             android:contentDescription="@string/login_facebook_description"
-            app:layout_constraintEnd_toStartOf="@+id/sign_in_twitter_button"
+            app:layout_constraintEnd_toStartOf="@+id/signInTwitterButton"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@id/loginLeftGuideLine"
             app:layout_constraintTop_toBottomOf="@id/resetPasswordButton"
             app:srcCompat="@drawable/facebook_logo" />
 
         <ImageButton
-            android:id="@+id/sign_in_twitter_button"
+            android:id="@+id/signInTwitterButton"
             android:layout_width="@dimen/login_social_button_size"
             android:layout_height="@dimen/login_social_button_size"
             android:background="@drawable/button_social_selector"
             android:contentDescription="@string/login_twitter_description"
-            app:layout_constraintEnd_toStartOf="@+id/sign_in_google_button"
+            app:layout_constraintEnd_toStartOf="@+id/signInGoogleButton"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/sign_in_facebook_button"
+            app:layout_constraintStart_toEndOf="@+id/signInFacebookButton"
             app:layout_constraintTop_toBottomOf="@id/resetPasswordButton"
-            app:layout_constraintTop_toTopOf="@id/sign_in_facebook_button"
+            app:layout_constraintTop_toTopOf="@id/signInFacebookButton"
             app:srcCompat="@drawable/twitter_logo" />
 
         <ImageButton
-            android:id="@+id/sign_in_google_button"
+            android:id="@+id/signInGoogleButton"
             android:layout_width="@dimen/login_social_button_size"
             android:layout_height="@dimen/login_social_button_size"
             android:background="@drawable/button_social_selector"
             android:contentDescription="@string/login_google_description"
             app:layout_constraintEnd_toEndOf="@id/loginRightGuideLine"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/sign_in_twitter_button"
+            app:layout_constraintStart_toEndOf="@+id/signInTwitterButton"
             app:layout_constraintTop_toBottomOf="@id/resetPasswordButton"
-            app:layout_constraintTop_toTopOf="@id/sign_in_facebook_button"
+            app:layout_constraintTop_toTopOf="@id/signInFacebookButton"
             app:srcCompat="@drawable/google_logo" />
 
         <TextView
@@ -146,7 +146,7 @@
             android:text="@string/register_test"
             app:layout_constraintEnd_toEndOf="@id/loginRightGuideLine"
             app:layout_constraintStart_toStartOf="@id/loginLeftGuideLine"
-            app:layout_constraintTop_toBottomOf="@id/sign_in_facebook_button" />
+            app:layout_constraintTop_toBottomOf="@id/signInFacebookButton" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

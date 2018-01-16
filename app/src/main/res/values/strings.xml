@@ -22,6 +22,8 @@
     <string name="sign_up_field_cannot_be_empty">This field cannot be empty.</string>
 
     <string name="remind_password_reset">Reset password</string>
+    <string name="reset_password_success">Reset password sent with success</string>
+    <string name="reset_password_no_email">No account with given email</string>
 
     <string name="main_activity_bottom_drawer_my_events">My events</string>
     <string name="main_activity_bottom_drawer_profile">Profile</string>
@@ -49,5 +51,8 @@
     <string name="unknown_http_exception">An unknown network error has occurred</string>
     <string name="http_error_500">Something wrong with server</string>
     <string name="email_is_taken">Email is already taken</string>
+    <string name="wrong_email_or_password">Wrong email or password</string>
+
+    <string name="not_implemented_yet">Not implemented yet</string>
 
 </resources>

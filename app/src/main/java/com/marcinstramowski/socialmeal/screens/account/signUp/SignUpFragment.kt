@@ -70,15 +70,13 @@ class SignUpFragment : BaseFragment<SignUpContract.Presenter>(), SignUpContract.
 
     private fun observeFormFieldsChanges() {
         val formFieldsChanges: Observable<SignUpFormFields> = Observable.combineLatest(
-                signUpName.textChanges().map { it.toString() },
-                signUpSurname.textChanges().map { it.toString() },
-                signUpEmail.textChanges().map { it.toString() },
-                signUpPassword.textChanges().map { it.toString() },
-                signUpConfirmPassword.textChanges().map { it.toString() },
-                Function5 { t1, t2, t3, t4, t5  -> SignUpFormFields(t1, t2, t3, t4, t5) }
+                signUpName.textChanges(),
+                signUpSurname.textChanges(),
+                signUpEmail.textChanges(),
+                signUpPassword.textChanges(),
+                signUpConfirmPassword.textChanges(),
+                Function5 { _, _, _, _, _ -> collectSignUpFormData() }
         )
-        formFieldsChanges.subscribe { registrationFields ->
-            presenter.observeFieldsChanges(registrationFields)
-        }
+        presenter.observeFieldsChanges(formFieldsChanges)
     }
 }
