@@ -38,6 +38,6 @@ interface SignInContract {
 
         fun onSignInWithGoogleClick()
 
-        fun observeFieldsChanges(emailField: Observable<String>, passwordField: Observable<String>)
+        fun observeFieldsChanges(observable: Observable<SignInFormFields>)
     }
 }

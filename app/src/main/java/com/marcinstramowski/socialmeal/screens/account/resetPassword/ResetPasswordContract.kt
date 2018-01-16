@@ -1,5 +1,7 @@
 package com.marcinstramowski.socialmeal.screens.account.resetPassword
 
+import android.support.annotation.StringRes
+import com.marcinstramowski.socialmeal.model.ResetPasswordFormFields
 import com.marcinstramowski.socialmeal.screens.base.BaseContract
 import io.reactivex.Observable
 
@@ -8,11 +10,24 @@ import io.reactivex.Observable
 */
 interface ResetPasswordContract {
     interface View : BaseContract.View<Presenter> {
-        fun setResetButtonEnabled()
-        fun setResetButtonDisabled()
+
+        fun setResetButtonEnabled(enabled: Boolean)
+
+        fun setResetButtonProcessing(processing: Boolean)
+
+        fun clearEmailField()
+
+        fun showResetPasswordSuccessMessage()
+
+        fun showResetPasswordErrorMessage(@StringRes messageId: Int)
+
+        fun showInvalidEmailMessage(visible: Boolean)
     }
 
     interface Presenter : BaseContract.Presenter {
-        fun observeFieldsChanges(emailField: Observable<String>)
+
+        fun observeFieldsChanges(emailObservable: Observable<ResetPasswordFormFields>)
+
+        fun onResetProgressButtonPressed(resetPasswordFormFields: ResetPasswordFormFields)
     }
 }

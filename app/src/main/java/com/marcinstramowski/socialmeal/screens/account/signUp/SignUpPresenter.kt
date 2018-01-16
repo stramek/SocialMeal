@@ -2,6 +2,7 @@ package com.marcinstramowski.socialmeal.screens.account.signUp
 
 import com.github.ajalt.timberkt.e
 import com.marcinstramowski.socialmeal.R
+import com.marcinstramowski.socialmeal.account.CredentialsValidator.Companion.ERROR_MESSAGE_DELAY_MS
 import com.marcinstramowski.socialmeal.account.UserPrefsDataSource
 import com.marcinstramowski.socialmeal.api.ServerApi
 import com.marcinstramowski.socialmeal.model.SignInRequest
@@ -27,7 +28,7 @@ class SignUpPresenter @Inject constructor(
 ) : SignUpContract.Presenter {
 
     companion object {
-        val ERROR_MESSAGE_DELAY_MS: Long = 500
+
     }
 
     private val compositeDisposable = CompositeDisposable()

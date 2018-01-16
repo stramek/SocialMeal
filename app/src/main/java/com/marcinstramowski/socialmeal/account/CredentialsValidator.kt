@@ -8,6 +8,12 @@ import org.apache.commons.validator.routines.EmailValidator
 class CredentialsValidator {
 
     companion object {
+
+        /**
+         * Defines default delay between user wrong data input and showing error
+         */
+        val ERROR_MESSAGE_DELAY_MS: Long = 500
+
         private val PASSWORD_REGEX = "^(?=.*[a-zA-Z!@#\$%^&*()_+|])(?=.*[0-9])[a-zA-Z0-9!@#\$%^&*()_+|]{6,}$"
 
         /**

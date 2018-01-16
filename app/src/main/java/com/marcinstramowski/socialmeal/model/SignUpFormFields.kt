@@ -3,7 +3,7 @@ package com.marcinstramowski.socialmeal.model
 import com.marcinstramowski.socialmeal.account.CredentialsValidator
 
 /**
- * Class representing registration form fields
+ * Class representing sign up form fields
  * Contains useful methods to check if content provided by user is valid such as [passwordsMatch] or [fieldsValid]
  *
  * Validation of [email] and [password] depends on [CredentialsValidator] class

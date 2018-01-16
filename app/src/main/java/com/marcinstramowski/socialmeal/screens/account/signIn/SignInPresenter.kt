@@ -11,7 +11,6 @@ import com.marcinstramowski.socialmeal.utils.DeviceInfo
 import com.marcinstramowski.socialmeal.utils.NetworkErrorMessageBuilder
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.functions.BiFunction
 import javax.inject.Inject
 
 /**
@@ -27,21 +26,12 @@ class SignInPresenter @Inject constructor(
 
     private val compositeDisposable = CompositeDisposable()
 
-    override fun onDestroy() {
-        compositeDisposable.clear()
-        super.onDestroy()
-    }
-
-    override fun observeFieldsChanges(emailField: Observable<String>, passwordField: Observable<String>) {
-        val isSignInEnabled: Observable<Boolean> = Observable.combineLatest(
-                emailField,
-                passwordField,
-                BiFunction { login, password -> login.isNotEmpty() && password.isNotEmpty() })
-        compositeDisposable.add(isSignInEnabled
+    override fun observeFieldsChanges(observable: Observable<SignInFormFields>) {
+        compositeDisposable.add(observable
                 .subscribeOn(schedulers.io())
                 .observeOn(schedulers.ui())
                 .subscribe(
-                        { fieldsFilled -> view.setSignInButtonEnabled(fieldsFilled) },
+                        { fieldsFilled -> view.setSignInButtonEnabled(fieldsFilled.fieldsNotBlank()) },
                         { error -> e(error) }
                 )
         )
@@ -65,6 +55,11 @@ class SignInPresenter @Inject constructor(
                         }
                 )
         )
+    }
+
+    override fun onDestroy() {
+        compositeDisposable.clear()
+        super.onDestroy()
     }
 
     private fun getNetworkErrorMessage(error: Throwable): Int {

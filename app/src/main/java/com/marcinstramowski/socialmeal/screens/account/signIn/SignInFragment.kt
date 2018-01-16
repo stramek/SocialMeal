@@ -10,6 +10,8 @@ import com.marcinstramowski.socialmeal.screens.account.resetPassword.ResetPasswo
 import com.marcinstramowski.socialmeal.screens.account.signUp.SignUpFragment
 import com.marcinstramowski.socialmeal.screens.base.BaseFragment
 import com.marcinstramowski.socialmeal.screens.main.MainActivity
+import io.reactivex.Observable
+import io.reactivex.functions.BiFunction
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
@@ -36,10 +38,12 @@ class SignInFragment : BaseFragment<SignInContract.Presenter>(), SignInContract.
     }
 
     private fun observeFormFields() {
-        presenter.observeFieldsChanges(
-                loginLogin.textChanges().map { it.toString() },
-                loginPassword.textChanges().map { it.toString() }
+        val formFieldsChanges: Observable<SignInFormFields> = Observable.combineLatest(
+                loginLogin.textChanges(),
+                loginPassword.textChanges(),
+                BiFunction { _, _ -> collectSignInFormData() }
         )
+        presenter.observeFieldsChanges(formFieldsChanges)
     }
 
     private fun collectSignInFormData(): SignInFormFields {
