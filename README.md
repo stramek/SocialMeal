@@ -33,7 +33,7 @@ Upcoming Features:
 - MVP architecture,
 - Written in Kotlin,
 - Dagger2 for DI,
-- RxJava2 for most concurrent tasks.
+- RxJava2 for most asynchronous tasks.
 
 ## Application screenshots
 
