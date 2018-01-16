@@ -30,10 +30,10 @@ Upcoming Features:
 - profile screen tests.
 
 ## More developer info
-- MVP architecture
-- Written in Kotlin
-- Dagger2 for DI
-- RxJava2 for most concurrent tasks
+- MVP architecture,
+- Written in Kotlin,
+- Dagger2 for DI,
+- RxJava2 for most concurrent tasks.
 
 ## Application screenshots
 
