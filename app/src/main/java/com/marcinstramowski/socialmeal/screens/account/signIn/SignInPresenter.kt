@@ -77,14 +77,14 @@ class SignInPresenter @Inject constructor(
     }
 
     override fun onSignInWithFacebookClick() {
-        view.showErrorMessage(R.string.not_implemented_yet)
+        view.signInWithFacebook()
     }
 
     override fun onSignInWithTwitterClick() {
-        view.showErrorMessage(R.string.not_implemented_yet)
+        view.signInWithTwitter()
     }
 
     override fun onSignInWithGoogleClick() {
-        view.showErrorMessage(R.string.not_implemented_yet)
+        view.signInWithGoogle()
     }
 }

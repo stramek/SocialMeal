@@ -22,6 +22,12 @@ interface SignInContract {
         fun setSignInButtonEnabled(enabled: Boolean)
 
         fun showErrorMessage(@StringRes stringId: Int)
+
+        fun signInWithFacebook()
+
+        fun signInWithTwitter()
+
+        fun signInWithGoogle()
     }
 
     interface Presenter : BaseContract.Presenter {

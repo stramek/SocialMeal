@@ -82,6 +82,18 @@ class SignInFragment : BaseFragment<SignInContract.Presenter>(), SignInContract.
         toast(stringId)
     }
 
+    override fun signInWithFacebook() {
+        toast(R.string.not_implemented_yet)
+    }
+
+    override fun signInWithTwitter() {
+        toast(R.string.not_implemented_yet)
+    }
+
+    override fun signInWithGoogle() {
+        toast(R.string.not_implemented_yet)
+    }
+
     override fun setSignInButtonProcessing(processing: Boolean) {
         signInProgressButton.setProcessing(processing)
     }

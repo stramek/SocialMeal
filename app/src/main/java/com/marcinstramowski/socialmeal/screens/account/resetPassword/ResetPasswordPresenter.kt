@@ -19,7 +19,7 @@ import javax.inject.Inject
 class ResetPasswordPresenter @Inject constructor(
         private val view: ResetPasswordContract.View,
         private val managementApi: ServerApi.ManagementApi,
-        private val schedulers: SchedulerProvider
+        var schedulers: SchedulerProvider
 ) : ResetPasswordContract.Presenter {
 
     private val compositeDisposable = CompositeDisposable()

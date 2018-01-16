@@ -1,5 +1,6 @@
 package com.marcinstramowski.socialmeal.screens.account.signUp
 
+import com.marcinstramowski.socialmeal.account.CredentialsValidator.Companion.ERROR_MESSAGE_DELAY_MS
 import com.marcinstramowski.socialmeal.account.UserPrefsDataSource
 import com.marcinstramowski.socialmeal.api.ServerApi
 import com.marcinstramowski.socialmeal.model.SignInResponse
@@ -34,7 +35,7 @@ class SignUpPresenterTest {
     private val signInResponse = SignInResponse(Token("accessToken", 0),
             Token("refreshToken", 0))
 
-    var scheduler = TestScheduler()
+    private var scheduler = TestScheduler()
 
     @Before
     fun prepareTest() {
@@ -42,7 +43,7 @@ class SignUpPresenterTest {
     }
 
     @Test
-    fun testRegisterSuccessCalledAfterRegisterRequest() {
+    fun testRegisterSuccessCalledAfterSignUpRequest() {
 
         managementApi.stub {
             on { signUp(any()) } doReturn Completable.complete()
@@ -60,7 +61,7 @@ class SignUpPresenterTest {
     }
 
     @Test
-    fun testRegisterErrorCalledAfterRegisterRequest() {
+    fun testRegisterErrorCalledAfterSignUpRequest() {
 
         managementApi.stub {
             on { signUp(any()) } doReturn Completable.error(Throwable())
@@ -78,7 +79,7 @@ class SignUpPresenterTest {
     }
 
     @Test
-    fun testSignUpErrorCalledAfterRegisterRequest() {
+    fun testSignUpErrorCalledAfterSignUpRequest() {
 
         managementApi.stub {
             on { signUp(any()) } doReturn Completable.complete()
@@ -162,25 +163,25 @@ class SignUpPresenterTest {
         var hidePasswordsDontMatchCounter = 0
 
         presenter.observeFieldsChanges(Observable.just(signUpFields(password = "pass", confirmPassword = "pass")))
-        scheduler.advanceTimeBy(SignUpPresenter.ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
+        scheduler.advanceTimeBy(ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
 
         verify(view, times(++hidePasswordsDontMatchCounter)).showPasswordsDontMatchMessage(visible = false)
         verify(view, times(showPasswordsDontMatchCounter)).showPasswordsDontMatchMessage(visible = true)
 
         presenter.observeFieldsChanges(Observable.just(signUpFields(password = "pass", confirmPassword = "")))
-        scheduler.advanceTimeBy(SignUpPresenter.ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
+        scheduler.advanceTimeBy(ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
 
         verify(view, times(++hidePasswordsDontMatchCounter)).showPasswordsDontMatchMessage(visible = false)
         verify(view, times(showPasswordsDontMatchCounter)).showPasswordsDontMatchMessage(visible = true)
 
         presenter.observeFieldsChanges(Observable.just(signUpFields(password = "pass", confirmPassword = "pass2")))
-        scheduler.advanceTimeBy(SignUpPresenter.ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
+        scheduler.advanceTimeBy(ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
 
         verify(view, times(hidePasswordsDontMatchCounter)).showPasswordsDontMatchMessage(visible = false)
         verify(view, times(++showPasswordsDontMatchCounter)).showPasswordsDontMatchMessage(visible = true)
 
         presenter.observeFieldsChanges(Observable.just(signUpFields(password = "", confirmPassword = "pass2")))
-        scheduler.advanceTimeBy(SignUpPresenter.ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
+        scheduler.advanceTimeBy(ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
 
         verify(view, times(hidePasswordsDontMatchCounter)).showPasswordsDontMatchMessage(visible = false)
         verify(view, times(++showPasswordsDontMatchCounter)).showPasswordsDontMatchMessage(visible = true)
@@ -194,19 +195,19 @@ class SignUpPresenterTest {
         var hidePasswordInvalidCounter = 0
 
         presenter.observeFieldsChanges(Observable.just(signUpFields(password = "aaa")))
-        scheduler.advanceTimeBy(SignUpPresenter.ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
+        scheduler.advanceTimeBy(ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
 
         verify(view, times(hidePasswordInvalidCounter)).showInvalidPasswordMessage(visible = false)
         verify(view, times(++showPasswordInvalidCounter)).showInvalidPasswordMessage(visible = true)
 
         presenter.observeFieldsChanges(Observable.just(signUpFields(password = "aaaaa1")))
-        scheduler.advanceTimeBy(SignUpPresenter.ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
+        scheduler.advanceTimeBy(ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
 
         verify(view, times(++hidePasswordInvalidCounter)).showInvalidPasswordMessage(visible = false)
         verify(view, times(showPasswordInvalidCounter)).showInvalidPasswordMessage(visible = true)
 
         presenter.observeFieldsChanges(Observable.just(signUpFields(password = ""))) // don't show message when empty
-        scheduler.advanceTimeBy(SignUpPresenter.ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
+        scheduler.advanceTimeBy(ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
 
         verify(view, times(++hidePasswordInvalidCounter)).showInvalidPasswordMessage(visible = false)
         verify(view, times(showPasswordInvalidCounter)).showInvalidPasswordMessage(visible = true)
@@ -220,13 +221,13 @@ class SignUpPresenterTest {
         var hideEmailInvalidCounter = 0
 
         presenter.observeFieldsChanges(Observable.just(signUpFields(email = "aaa")))
-        scheduler.advanceTimeBy(SignUpPresenter.ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
+        scheduler.advanceTimeBy(ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
 
         verify(view, times(hideEmailInvalidCounter)).showInvalidEmailMessage(visible = false)
         verify(view, times(++showEmailInvalidCounter)).showInvalidEmailMessage(visible = true)
 
         presenter.observeFieldsChanges(Observable.just(signUpFields(email = "test@gmail.com")))
-        scheduler.advanceTimeBy(SignUpPresenter.ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
+        scheduler.advanceTimeBy(ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
 
         verify(view, times(++hideEmailInvalidCounter)).showInvalidEmailMessage(visible = false)
         verify(view, times(showEmailInvalidCounter)).showInvalidEmailMessage(visible = true)
