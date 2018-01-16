@@ -1,18 +1,21 @@
 package com.marcinstramowski.socialmeal.screens.account.signUp
 
-import com.marcinstramowski.socialmeal.account.DataValidator
 import com.marcinstramowski.socialmeal.account.UserPrefsDataSource
 import com.marcinstramowski.socialmeal.api.ServerApi
 import com.marcinstramowski.socialmeal.model.SignInResponse
 import com.marcinstramowski.socialmeal.model.SignUpFormFields
 import com.marcinstramowski.socialmeal.model.Token
+import com.marcinstramowski.socialmeal.rxSchedulers.TestSchedulerProvider
 import com.marcinstramowski.socialmeal.rxSchedulers.TrampolineSchedulerProvider
 import com.marcinstramowski.socialmeal.utils.DeviceInfo
 import com.nhaarman.mockito_kotlin.*
 import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Single
+import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Test
+import java.util.concurrent.TimeUnit
 
 /**
  * [SignUpPresenter] tests
@@ -31,9 +34,11 @@ class SignUpPresenterTest {
     private val signInResponse = SignInResponse(Token("accessToken", 0),
             Token("refreshToken", 0))
 
+    var scheduler = TestScheduler()
+
     @Before
     fun prepareTest() {
-        presenter = SignUpPresenter(view, managementApi, deviceInfo, userPrefs, DataValidator(), TrampolineSchedulerProvider())
+        presenter = SignUpPresenter(view, managementApi, deviceInfo, userPrefs, TrampolineSchedulerProvider())
     }
 
     @Test
@@ -93,13 +98,13 @@ class SignUpPresenterTest {
     @Test
     fun disableRegisterButtonWhenFieldsAreEmpty() {
 
-        presenter.observeFieldsChanges(signUpFields(firstName = ""))
-        presenter.observeFieldsChanges(signUpFields(surname = ""))
-        presenter.observeFieldsChanges(signUpFields(email = ""))
-        presenter.observeFieldsChanges(signUpFields(password = ""))
-        presenter.observeFieldsChanges(signUpFields(confirmPassword = ""))
-        presenter.observeFieldsChanges(signUpFields("name", "surname",
-                "email@gmail.com", "abcd123", "abcd123"))
+        presenter.observeFieldsChanges(Observable.just(signUpFields(firstName = "")))
+        presenter.observeFieldsChanges(Observable.just(signUpFields(surname = "")))
+        presenter.observeFieldsChanges(Observable.just(signUpFields(email = "")))
+        presenter.observeFieldsChanges(Observable.just(signUpFields(password = "")))
+        presenter.observeFieldsChanges(Observable.just(signUpFields(confirmPassword = "")))
+        presenter.observeFieldsChanges(Observable.just(signUpFields("name", "surname",
+                "email@gmail.com", "abcd123", "abcd123")))
 
         inOrder(view) {
             verify(view, times(5)).setSignUpButtonEnabled(false)
@@ -109,11 +114,11 @@ class SignUpPresenterTest {
 
     @Test
     fun disableRegisterButtonWhenEmailIsInvalid() {
-        presenter.observeFieldsChanges(signUpFields(email = "test.com")) // not valid
-        presenter.observeFieldsChanges(signUpFields(email = "@test.com")) // not valid
-        presenter.observeFieldsChanges(signUpFields(email = "a@test.")) // not valid
-        presenter.observeFieldsChanges(signUpFields(email = "test.test@")) // not valid
-        presenter.observeFieldsChanges(signUpFields(email = "test@test.com")) // valid
+        presenter.observeFieldsChanges(Observable.just(signUpFields(email = "test.com"))) // not valid
+        presenter.observeFieldsChanges(Observable.just(signUpFields(email = "@test.com"))) // not valid
+        presenter.observeFieldsChanges(Observable.just(signUpFields(email = "a@test."))) // not valid
+        presenter.observeFieldsChanges(Observable.just(signUpFields(email = "test.test@"))) // not valid
+        presenter.observeFieldsChanges(Observable.just(signUpFields(email = "test@test.com"))) // valid
 
         inOrder(view) {
             verify(view, times(4)).setSignUpButtonEnabled(false)
@@ -123,12 +128,12 @@ class SignUpPresenterTest {
 
     @Test
     fun disableRegisterButtonWhenPasswordIsInvalid() {
-        presenter.observeFieldsChanges(signUpFields(password = "aaaaa", confirmPassword = "aaaaa")) // too short, no number
-        presenter.observeFieldsChanges(signUpFields(password = "aaaa1", confirmPassword = "aaaa1")) // too short
-        presenter.observeFieldsChanges(signUpFields(password = "11111", confirmPassword = "11111")) // too short, no letter
-        presenter.observeFieldsChanges(signUpFields(password = "1111a", confirmPassword = "1111a")) // too short
-        presenter.observeFieldsChanges(signUpFields(password = "aaa1!!", confirmPassword = "aaa1!!")) // valid
-        presenter.observeFieldsChanges(signUpFields(password = "1aaaaa", confirmPassword = "1aaaaa")) // valid
+        presenter.observeFieldsChanges(Observable.just(signUpFields(password = "aaaaa", confirmPassword = "aaaaa"))) // too short, no number
+        presenter.observeFieldsChanges(Observable.just(signUpFields(password = "aaaa1", confirmPassword = "aaaa1"))) // too short
+        presenter.observeFieldsChanges(Observable.just(signUpFields(password = "11111", confirmPassword = "11111"))) // too short, no letter
+        presenter.observeFieldsChanges(Observable.just(signUpFields(password = "1111a", confirmPassword = "1111a"))) // too short
+        presenter.observeFieldsChanges(Observable.just(signUpFields(password = "aaa1!!", confirmPassword = "aaa1!!"))) // valid
+        presenter.observeFieldsChanges(Observable.just(signUpFields(password = "1aaaaa", confirmPassword = "1aaaaa"))) // valid
 
         inOrder(view) {
             verify(view, times(4)).setSignUpButtonEnabled(false)
@@ -138,10 +143,10 @@ class SignUpPresenterTest {
 
     @Test
     fun disableRegisterButtonWhenPasswordsNotMatchIsInvalid() {
-        presenter.observeFieldsChanges(signUpFields(password = "aaa1!!", confirmPassword = "aaa1!!!"))
-        presenter.observeFieldsChanges(signUpFields(password = "1aaaaa", confirmPassword = "1aaaaaz"))
-        presenter.observeFieldsChanges(signUpFields(password = "@1aaaaa", confirmPassword = "1aaaaa"))
-        presenter.observeFieldsChanges(signUpFields(password = "1aa@aaa", confirmPassword = "1aa@aaa"))
+        presenter.observeFieldsChanges(Observable.just(signUpFields(password = "aaa1!!", confirmPassword = "aaa1!!!")))
+        presenter.observeFieldsChanges(Observable.just(signUpFields(password = "1aaaaa", confirmPassword = "1aaaaaz")))
+        presenter.observeFieldsChanges(Observable.just(signUpFields(password = "@1aaaaa", confirmPassword = "1aaaaa")))
+        presenter.observeFieldsChanges(Observable.just(signUpFields(password = "1aa@aaa", confirmPassword = "1aa@aaa")))
 
         inOrder(view) {
             verify(view, times(3)).setSignUpButtonEnabled(false)
@@ -151,38 +156,80 @@ class SignUpPresenterTest {
 
     @Test
     fun showErrorMessageWhenPasswordsDontMatch() {
-        presenter.observeFieldsChanges(signUpFields(password = "pass", confirmPassword = "pass"))
-        presenter.observeFieldsChanges(signUpFields(password = "pass", confirmPassword = ""))
-        presenter.observeFieldsChanges(signUpFields(password = "pass", confirmPassword = "pass2"))
-        presenter.observeFieldsChanges(signUpFields(password = "", confirmPassword = "pass2"))
+        presenter.schedulers = TestSchedulerProvider(scheduler)
 
-        inOrder(view) {
-            verify(view, times(2)).showPasswordsDontMatchMessage(visible = false)
-            verify(view, times(2)).showPasswordsDontMatchMessage(visible = true)
-        }
+        var showPasswordsDontMatchCounter = 0
+        var hidePasswordsDontMatchCounter = 0
+
+        presenter.observeFieldsChanges(Observable.just(signUpFields(password = "pass", confirmPassword = "pass")))
+        scheduler.advanceTimeBy(SignUpPresenter.ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
+
+        verify(view, times(++hidePasswordsDontMatchCounter)).showPasswordsDontMatchMessage(visible = false)
+        verify(view, times(showPasswordsDontMatchCounter)).showPasswordsDontMatchMessage(visible = true)
+
+        presenter.observeFieldsChanges(Observable.just(signUpFields(password = "pass", confirmPassword = "")))
+        scheduler.advanceTimeBy(SignUpPresenter.ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
+
+        verify(view, times(++hidePasswordsDontMatchCounter)).showPasswordsDontMatchMessage(visible = false)
+        verify(view, times(showPasswordsDontMatchCounter)).showPasswordsDontMatchMessage(visible = true)
+
+        presenter.observeFieldsChanges(Observable.just(signUpFields(password = "pass", confirmPassword = "pass2")))
+        scheduler.advanceTimeBy(SignUpPresenter.ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
+
+        verify(view, times(hidePasswordsDontMatchCounter)).showPasswordsDontMatchMessage(visible = false)
+        verify(view, times(++showPasswordsDontMatchCounter)).showPasswordsDontMatchMessage(visible = true)
+
+        presenter.observeFieldsChanges(Observable.just(signUpFields(password = "", confirmPassword = "pass2")))
+        scheduler.advanceTimeBy(SignUpPresenter.ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
+
+        verify(view, times(hidePasswordsDontMatchCounter)).showPasswordsDontMatchMessage(visible = false)
+        verify(view, times(++showPasswordsDontMatchCounter)).showPasswordsDontMatchMessage(visible = true)
     }
 
     @Test
     fun showErrorMessageWhenPasswordIsInvalid() {
-        presenter.observeFieldsChanges(signUpFields(password = "aaa"))
-        presenter.observeFieldsChanges(signUpFields(password = "aaaaa1"))
-        presenter.observeFieldsChanges(signUpFields(password = "")) // don't show message when empty
+        presenter.schedulers = TestSchedulerProvider(scheduler)
 
-        inOrder(view) {
-            verify(view).showInvalidPasswordMessage(visible = true)
-            verify(view, times(2)).showInvalidPasswordMessage(visible = false)
-        }
+        var showPasswordInvalidCounter = 0
+        var hidePasswordInvalidCounter = 0
+
+        presenter.observeFieldsChanges(Observable.just(signUpFields(password = "aaa")))
+        scheduler.advanceTimeBy(SignUpPresenter.ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
+
+        verify(view, times(hidePasswordInvalidCounter)).showInvalidPasswordMessage(visible = false)
+        verify(view, times(++showPasswordInvalidCounter)).showInvalidPasswordMessage(visible = true)
+
+        presenter.observeFieldsChanges(Observable.just(signUpFields(password = "aaaaa1")))
+        scheduler.advanceTimeBy(SignUpPresenter.ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
+
+        verify(view, times(++hidePasswordInvalidCounter)).showInvalidPasswordMessage(visible = false)
+        verify(view, times(showPasswordInvalidCounter)).showInvalidPasswordMessage(visible = true)
+
+        presenter.observeFieldsChanges(Observable.just(signUpFields(password = ""))) // don't show message when empty
+        scheduler.advanceTimeBy(SignUpPresenter.ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
+
+        verify(view, times(++hidePasswordInvalidCounter)).showInvalidPasswordMessage(visible = false)
+        verify(view, times(showPasswordInvalidCounter)).showInvalidPasswordMessage(visible = true)
     }
 
     @Test
     fun showErrorMessageWhenEmailIsInvalid() {
-        presenter.observeFieldsChanges(signUpFields(email = "aaa"))
-        presenter.observeFieldsChanges(signUpFields(email = "test@gmail.com"))
+        presenter.schedulers = TestSchedulerProvider(scheduler)
 
-        inOrder(view) {
-            verify(view).showInvalidEmailMessage(visible = true)
-            verify(view).showInvalidEmailMessage(visible = false)
-        }
+        var showEmailInvalidCounter = 0
+        var hideEmailInvalidCounter = 0
+
+        presenter.observeFieldsChanges(Observable.just(signUpFields(email = "aaa")))
+        scheduler.advanceTimeBy(SignUpPresenter.ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
+
+        verify(view, times(hideEmailInvalidCounter)).showInvalidEmailMessage(visible = false)
+        verify(view, times(++showEmailInvalidCounter)).showInvalidEmailMessage(visible = true)
+
+        presenter.observeFieldsChanges(Observable.just(signUpFields(email = "test@gmail.com")))
+        scheduler.advanceTimeBy(SignUpPresenter.ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS)
+
+        verify(view, times(++hideEmailInvalidCounter)).showInvalidEmailMessage(visible = false)
+        verify(view, times(showEmailInvalidCounter)).showInvalidEmailMessage(visible = true)
     }
 
     private fun signUpFields(firstName: String = "name",

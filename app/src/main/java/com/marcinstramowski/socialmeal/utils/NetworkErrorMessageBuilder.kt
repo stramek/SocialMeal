@@ -9,23 +9,34 @@ import kotlin.reflect.KClass
 import kotlin.reflect.jvm.jvmName
 
 /**
- * Created by marcinstramowski on 07.01.2018.
+ * Util class to provide proper error string id message that depends on passed [throwable]
+ *
+ * Custom error messages
  */
 class NetworkErrorMessageBuilder(private val throwable: Throwable) {
 
     private val httpExceptions = mutableListOf<HttpErrorMessageStringRes>()
     private val otherExceptions = mutableListOf<ErrorMessageStringRes>()
 
-    fun addHttpErrorMessage(errorCode: Int, @StringRes messageStringres: Int): NetworkErrorMessageBuilder {
-        httpExceptions.add(HttpErrorMessageStringRes(errorCode, messageStringres))
+    /**
+     * Adds custom http [errorCode] to be handled with passed [messageStringRes]
+     */
+    fun addHttpErrorMessage(errorCode: Int, @StringRes messageStringRes: Int): NetworkErrorMessageBuilder {
+        httpExceptions.add(HttpErrorMessageStringRes(errorCode, messageStringRes))
         return this
     }
 
-    fun <T : Exception> addErrorMessage(exception: T, @StringRes messageStringres: Int): NetworkErrorMessageBuilder {
-        otherExceptions.add(ErrorMessageStringRes(exception::class, messageStringres))
+    /**
+     * Adds custom [exception] to be handled with passed [messageStringRes]
+     */
+    fun <T : Exception> addErrorMessage(exception: T, @StringRes messageStringRes: Int): NetworkErrorMessageBuilder {
+        otherExceptions.add(ErrorMessageStringRes(exception::class, messageStringRes))
         return this
     }
 
+    /**
+     * Returns suitable error message to passed [throwable]
+     */
     fun getMessageStringId(): Int {
         return when (throwable) {
             is HttpException -> getHttpErrorMessageStringId(throwable)
