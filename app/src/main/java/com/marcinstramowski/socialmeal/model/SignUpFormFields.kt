@@ -9,11 +9,11 @@ import com.marcinstramowski.socialmeal.account.CredentialsValidator
  * Validation of [email] and [password] depends on [CredentialsValidator] class
  */
 data class SignUpFormFields(
-        val firstName: String,
-        val surname: String,
-        val email: String,
-        val password: String,
-        val confirmPassword: String
+    val firstName: String,
+    val surname: String,
+    val email: String,
+    val password: String,
+    val confirmPassword: String
 ) {
     /**
      * Checks if [firstName], [surname], [email], [password], [confirmPassword] are not blank

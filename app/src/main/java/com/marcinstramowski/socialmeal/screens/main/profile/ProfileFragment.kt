@@ -2,10 +2,7 @@ package com.marcinstramowski.socialmeal.screens.main.profile
 
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
-import android.view.Menu
-import android.view.MenuInflater
 import com.bumptech.glide.request.RequestOptions.bitmapTransform
-import com.github.ajalt.timberkt.e
 import com.marcinstramowski.socialmeal.GlideApp
 import com.marcinstramowski.socialmeal.R
 import com.marcinstramowski.socialmeal.screens.account.AccountActivity
@@ -20,7 +17,8 @@ import javax.inject.Inject
  */
 class ProfileFragment : BaseFragment<ProfileContract.Presenter>(), ProfileContract.View {
 
-    @Inject override lateinit var presenter: ProfileContract.Presenter
+    @Inject
+    override lateinit var presenter: ProfileContract.Presenter
     override val contentViewId = R.layout.fragment_profile
 
     override fun onCreated(savedInstanceState: Bundle?) {
@@ -30,12 +28,12 @@ class ProfileFragment : BaseFragment<ProfileContract.Presenter>(), ProfileContra
     override fun setUserAvatar(avatarUrl: String) {
         val image = ContextCompat.getDrawable(context!!, R.drawable.hugh)
         GlideApp.with(this)
-                .load(image)
-                .apply(bitmapTransform(BlurTransformation(25)))
-                .into(profileBackground)
+            .load(image)
+            .apply(bitmapTransform(BlurTransformation(25)))
+            .into(profileBackground)
         GlideApp.with(this)
-                .load(image)
-                .into(profileAvatar)
+            .load(image)
+            .into(profileAvatar)
     }
 
     override fun signOut() {

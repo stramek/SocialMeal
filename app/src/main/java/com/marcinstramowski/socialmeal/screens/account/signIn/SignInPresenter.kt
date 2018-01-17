@@ -17,30 +17,35 @@ import javax.inject.Inject
  * Sign in screen logic
  */
 class SignInPresenter @Inject constructor(
-        private val view: SignInContract.View,
-        private val managementApi: ServerApi.ManagementApi,
-        private val deviceInfo: DeviceInfo,
-        private val userPrefsDataSource: UserPrefsDataSource,
-        private val schedulers: SchedulerProvider
+    private val view: SignInContract.View,
+    private val managementApi: ServerApi.ManagementApi,
+    private val deviceInfo: DeviceInfo,
+    private val userPrefsDataSource: UserPrefsDataSource,
+    private val schedulers: SchedulerProvider
 ) : SignInContract.Presenter {
 
     private val compositeDisposable = CompositeDisposable()
 
     override fun observeFieldsChanges(observable: Observable<SignInFormFields>) {
         compositeDisposable.add(observable
-                .subscribeOn(schedulers.io())
-                .observeOn(schedulers.ui())
-                .subscribe(
-                        { fieldsFilled -> view.setSignInButtonEnabled(fieldsFilled.fieldsNotBlank()) },
-                        { error -> e(error) }
-                )
+            .subscribeOn(schedulers.io())
+            .observeOn(schedulers.ui())
+            .subscribe(
+                { fieldsFilled -> view.setSignInButtonEnabled(fieldsFilled.fieldsNotBlank()) },
+                { error -> e(error) }
+            )
         )
     }
 
     override fun onSignInButtonClick(fields: SignInFormFields) {
         compositeDisposable.add(
-                managementApi.signIn(SignInRequest(fields.email, fields.password,
-                        deviceInfo.deviceId, deviceInfo.deviceName))
+            managementApi
+                .signIn(
+                    SignInRequest(
+                        fields.email, fields.password,
+                        deviceInfo.deviceId, deviceInfo.deviceName
+                    )
+                )
                 .subscribeOn(schedulers.io())
                 .observeOn(schedulers.io())
                 .doOnSuccess { userPrefsDataSource.saveTokens(it) }
@@ -48,11 +53,11 @@ class SignInPresenter @Inject constructor(
                 .doOnSubscribe { view.setSignInButtonProcessing(true) }
                 .doAfterTerminate { view.setSignInButtonProcessing(false) }
                 .subscribe(
-                        { _ -> view.showMainActivity() },
-                        { error ->
-                            view.showErrorMessage(getNetworkErrorMessage(error))
-                            e(error)
-                        }
+                    { _ -> view.showMainActivity() },
+                    { error ->
+                        view.showErrorMessage(getNetworkErrorMessage(error))
+                        e(error)
+                    }
                 )
         )
     }
@@ -64,8 +69,8 @@ class SignInPresenter @Inject constructor(
 
     private fun getNetworkErrorMessage(error: Throwable): Int {
         return NetworkErrorMessageBuilder(error)
-                .addHttpErrorMessage(400, R.string.wrong_email_or_password)
-                .getMessageStringId()
+            .addHttpErrorMessage(400, R.string.wrong_email_or_password)
+            .getMessageStringId()
     }
 
     override fun onResetPasswordClick() {

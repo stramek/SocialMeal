@@ -10,9 +10,6 @@ import android.widget.FrameLayout
 import com.marcinstramowski.socialmeal.R
 import kotlinx.android.synthetic.main.view_progress_button.view.*
 
-/**
- * Created by marcinstramowski on 17.12.2017.
- */
 class ProgressButton(context: Context, attrs: AttributeSet?) : FrameLayout(context, attrs) {
 
     private val buttonText: String
@@ -31,7 +28,8 @@ class ProgressButton(context: Context, attrs: AttributeSet?) : FrameLayout(conte
 
     override fun setEnabled(enabled: Boolean) {
         button.isEnabled = enabled
-        val color = if (enabled) R.color.account_enabled_color else R.color.account_button_disabled_color
+        val color =
+            if (enabled) R.color.account_enabled_color else R.color.account_button_disabled_color
         button.setTextColor(ContextCompat.getColor(context, color))
     }
 

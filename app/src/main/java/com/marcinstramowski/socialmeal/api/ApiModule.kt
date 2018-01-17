@@ -1,9 +1,9 @@
 package com.marcinstramowski.socialmeal.api
 
-import dagger.Module
-import dagger.Provides
 import com.marcinstramowski.socialmeal.api.auth.ApiAuthenticator
 import com.marcinstramowski.socialmeal.api.auth.AuthHeaderInterceptor
+import dagger.Module
+import dagger.Provides
 import javax.inject.Singleton
 
 /**
@@ -25,7 +25,9 @@ class ApiModule {
 
     @Singleton
     @Provides
-    internal fun provideSocialMealApi(interceptor: AuthHeaderInterceptor, authenticator: ApiAuthenticator): ServerApi.UserApi {
+    internal fun provideSocialMealApi(
+        interceptor: AuthHeaderInterceptor, authenticator: ApiAuthenticator
+    ): ServerApi.UserApi {
         return ServerApi.Factory.prepareUserService(interceptor, authenticator)
     }
 }

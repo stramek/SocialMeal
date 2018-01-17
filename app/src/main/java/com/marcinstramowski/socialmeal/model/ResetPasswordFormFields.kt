@@ -6,7 +6,7 @@ import com.marcinstramowski.socialmeal.account.CredentialsValidator
  * Reset password form fields data
  */
 data class ResetPasswordFormFields(
-   val email: String
+    val email: String
 ) {
 
     /**

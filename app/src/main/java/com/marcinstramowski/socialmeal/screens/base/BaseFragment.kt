@@ -10,7 +10,8 @@ import dagger.android.support.DaggerFragment
  * Base application fragment defining [BasePresenter] lifecycle methods
  * such as [onCreate], [onStart], [onStop] or [onDestroy]
  */
-abstract class BaseFragment<out T : BaseContract.Presenter> : DaggerFragment(), BaseContract.View<T> {
+abstract class BaseFragment<out T : BaseContract.Presenter> : DaggerFragment(),
+    BaseContract.View<T> {
 
     /**
      * Allows inheriting fragments to easily change view to other fragment
@@ -23,8 +24,11 @@ abstract class BaseFragment<out T : BaseContract.Presenter> : DaggerFragment(), 
      */
     abstract val contentViewId: Int
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
-            inflater.inflate(contentViewId, container, false)!!
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(contentViewId, container, false)!!
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

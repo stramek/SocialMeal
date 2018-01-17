@@ -1,12 +1,12 @@
 package com.marcinstramowski.socialmeal.screens.account
 
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import com.marcinstramowski.socialmeal.R
+import com.marcinstramowski.socialmeal.screens.account.signIn.SignInFragment
 import com.marcinstramowski.socialmeal.screens.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
-import android.graphics.drawable.AnimationDrawable
-import com.marcinstramowski.socialmeal.screens.account.signIn.SignInFragment
 
 
 /**
@@ -16,8 +16,8 @@ import com.marcinstramowski.socialmeal.screens.account.signIn.SignInFragment
 class AccountActivity : BaseActivity<AccountContract.Presenter>(), AccountContract.View {
 
     companion object {
-        val GRADIENT_ENTER_DURATION_MS = 2000
-        val GRADIENT_EXIT_DURATION_MS = 5000
+        const val GRADIENT_ENTER_DURATION_MS = 2000
+        const val GRADIENT_EXIT_DURATION_MS = 5000
     }
 
     override val contentViewId = R.layout.activity_login

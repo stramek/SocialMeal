@@ -10,7 +10,8 @@ import javax.inject.Inject
  */
 class MyEventsFragment : BaseFragment<MyEventsContract.Presenter>(), MyEventsContract.View {
 
-    @Inject override lateinit var presenter: MyEventsContract.Presenter
+    @Inject
+    override lateinit var presenter: MyEventsContract.Presenter
     override val contentViewId = R.layout.fragment_my_events
 
     override fun onCreated(savedInstanceState: Bundle?) {

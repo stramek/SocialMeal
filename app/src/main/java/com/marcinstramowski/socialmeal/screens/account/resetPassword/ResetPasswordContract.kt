@@ -6,8 +6,8 @@ import com.marcinstramowski.socialmeal.screens.base.BaseContract
 import io.reactivex.Observable
 
 /**
-* Contract interfaces between [ResetPasswordFragment] and [ResetPasswordPresenter]
-*/
+ * Contract interfaces between [ResetPasswordFragment] and [ResetPasswordPresenter]
+ */
 interface ResetPasswordContract {
     interface View : BaseContract.View<Presenter> {
 

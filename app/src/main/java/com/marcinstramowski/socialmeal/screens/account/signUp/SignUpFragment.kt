@@ -19,23 +19,28 @@ import javax.inject.Inject
  */
 class SignUpFragment : BaseFragment<SignUpContract.Presenter>(), SignUpContract.View {
 
-    @Inject override lateinit var presenter: SignUpContract.Presenter
+    @Inject
+    override lateinit var presenter: SignUpContract.Presenter
 
     override val contentViewId = R.layout.fragment_sign_up
 
 
     override fun onCreated(savedInstanceState: Bundle?) {
         observeFormFieldsChanges()
-        signUpProgressButton.setOnClickListener { presenter.onSignUpButtonClick(collectSignUpFormData()) }
+        signUpProgressButton.setOnClickListener {
+            presenter.onSignUpButtonClick(
+                collectSignUpFormData()
+            )
+        }
     }
 
     private fun collectSignUpFormData(): SignUpFormFields {
         return SignUpFormFields(
-                signUpName.text.toString().trim(),
-                signUpSurname.text.toString().trim(),
-                signUpEmail.text.toString(),
-                signUpPassword.text.toString(),
-                signUpConfirmPassword.text.toString()
+            signUpName.text.toString().trim(),
+            signUpSurname.text.toString().trim(),
+            signUpEmail.text.toString(),
+            signUpPassword.text.toString(),
+            signUpConfirmPassword.text.toString()
         )
     }
 
@@ -70,12 +75,12 @@ class SignUpFragment : BaseFragment<SignUpContract.Presenter>(), SignUpContract.
 
     private fun observeFormFieldsChanges() {
         val formFieldsChanges: Observable<SignUpFormFields> = Observable.combineLatest(
-                signUpName.textChanges(),
-                signUpSurname.textChanges(),
-                signUpEmail.textChanges(),
-                signUpPassword.textChanges(),
-                signUpConfirmPassword.textChanges(),
-                Function5 { _, _, _, _, _ -> collectSignUpFormData() }
+            signUpName.textChanges(),
+            signUpSurname.textChanges(),
+            signUpEmail.textChanges(),
+            signUpPassword.textChanges(),
+            signUpConfirmPassword.textChanges(),
+            Function5 { _, _, _, _, _ -> collectSignUpFormData() }
         )
         presenter.observeFieldsChanges(formFieldsChanges)
     }

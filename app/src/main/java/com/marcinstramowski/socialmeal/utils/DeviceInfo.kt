@@ -12,7 +12,7 @@ import javax.inject.Singleton
 data class DeviceInfo(val deviceId: String, val deviceName: String) {
 
     @Inject constructor  (context: Context) : this(
-            deviceId = Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID),
-            deviceName = android.os.Build.MODEL
+        deviceId = Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID),
+        deviceName = android.os.Build.MODEL
     )
 }

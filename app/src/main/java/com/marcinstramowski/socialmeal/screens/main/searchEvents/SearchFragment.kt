@@ -11,6 +11,7 @@ import javax.inject.Inject
 class SearchFragment : BaseFragment<SearchContract.Presenter>(), SearchContract.View {
 
     @Inject override lateinit var presenter: SearchContract.Presenter
+
     override val contentViewId = R.layout.fragment_search
 
     override fun onCreated(savedInstanceState: Bundle?) {

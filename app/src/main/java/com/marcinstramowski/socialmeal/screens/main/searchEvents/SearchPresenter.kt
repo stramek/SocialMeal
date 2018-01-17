@@ -6,7 +6,7 @@ import javax.inject.Inject
  * Search event screen logic
  */
 class SearchPresenter @Inject constructor(
-        private val view: SearchContract.View
+    private val view: SearchContract.View
 ) : SearchContract.Presenter {
 
     override fun onCreate() {

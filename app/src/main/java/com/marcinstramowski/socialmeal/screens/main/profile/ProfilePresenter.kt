@@ -6,7 +6,7 @@ import javax.inject.Inject
  * Profile screen logic
  */
 class ProfilePresenter @Inject constructor(
-        private val view: ProfileContract.View
+    private val view: ProfileContract.View
 ) : ProfileContract.Presenter {
 
     override fun onCreate() {

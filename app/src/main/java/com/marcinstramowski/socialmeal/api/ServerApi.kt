@@ -51,18 +51,20 @@ interface ServerApi {
         /**
          * Determines api maximum delay in seconds after sending request before returning timeout exception
          */
-        private val API_TIMEOUT_DELAY_SECONDS: Long = 5
+        private const val API_TIMEOUT_DELAY_SECONDS: Long = 5
 
         /**
          * Prepare service with api calls for logged user.
          * Need authenticator in case of access token not valid.
          * Need token handler for automatic header with authentication token.
          */
-        fun prepareUserService(tokenHandler: AuthHeaderInterceptor, authenticator: ApiAuthenticator): UserApi {
+        fun prepareUserService(
+            tokenHandler: AuthHeaderInterceptor, authenticator: ApiAuthenticator
+        ): UserApi {
             val userOkHttp = basicOkHttpBuilder()
-                    .addInterceptor(tokenHandler)
-                    .authenticator(authenticator)
-                    .build()
+                .addInterceptor(tokenHandler)
+                .authenticator(authenticator)
+                .build()
             return fromRetrofit(userOkHttp).create(UserApi::class.java)
         }
 
@@ -78,8 +80,8 @@ interface ServerApi {
          * Basic api OkHttp builder
          */
         private fun basicOkHttpBuilder() = OkHttpClient.Builder()
-                .connectTimeout(API_TIMEOUT_DELAY_SECONDS, TimeUnit.SECONDS)
-                .addInterceptor(HttpLoggingInterceptor().setLevel(getLoggingLevel()))
+            .connectTimeout(API_TIMEOUT_DELAY_SECONDS, TimeUnit.SECONDS)
+            .addInterceptor(HttpLoggingInterceptor().setLevel(getLoggingLevel()))
 
         /**
          * Provides api logging level. Logs are available only on debug version
@@ -96,11 +98,11 @@ interface ServerApi {
          */
         private fun fromRetrofit(userOkHttp: OkHttpClient): Retrofit {
             return Retrofit.Builder()
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .addConverterFactory(GsonConverterFactory.create(getGsonObjectMapper()))
-                    .baseUrl(BuildConfig.API_URL)
-                    .client(userOkHttp)
-                    .build()
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(getGsonObjectMapper()))
+                .baseUrl(BuildConfig.API_URL)
+                .client(userOkHttp)
+                .build()
         }
 
         /**
