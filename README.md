@@ -19,20 +19,21 @@ This is begining of development. At this moment project include:
 - basic model classes,
 - sign in screen,
 - forgot password screen,
-- sign up screen
+- sign up screen.
 
 Upcoming Features:
-- profile screen layout
-- profile screen logic
-- profile screen upload avatar
-- profile screen upload background photo
-- profile screen tests
+- mock server tests,
+- profile screen layout,
+- profile screen logic,
+- profile screen upload avatar,
+- profile screen upload background photo,
+- profile screen tests.
 
 ## More developer info
-- MVP architecture
-- Written in Kotlin
-- Dagger2 for DI
-- RxJava2 for most concurrent tasks
+- MVP architecture,
+- Written in Kotlin,
+- Dagger2 for DI,
+- RxJava2 for most asynchronous tasks.
 
 ## Application screenshots
 
