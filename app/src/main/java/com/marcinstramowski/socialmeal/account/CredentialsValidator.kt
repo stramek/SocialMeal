@@ -14,7 +14,8 @@ class CredentialsValidator {
          */
         val ERROR_MESSAGE_DELAY_MS: Long = 500
 
-        private val PASSWORD_REGEX = "^(?=.*[a-zA-Z!@#\$%^&*()_+|])(?=.*[0-9])[a-zA-Z0-9!@#\$%^&*()_+|]{6,}$"
+        private const val PASSWORD_REGEX =
+            "^(?=.*[a-zA-Z!@#\$%^&*()_+|])(?=.*[0-9])[a-zA-Z0-9!@#\$%^&*()_+|]{6,}$"
 
         /**
          * Checks if provided [email] is actually email

@@ -1,9 +1,8 @@
 package com.marcinstramowski.socialmeal.screens.base
 
 import android.os.Bundle
-import android.support.annotation.LayoutRes
-import dagger.android.support.DaggerAppCompatActivity
 import com.marcinstramowski.socialmeal.R
+import dagger.android.support.DaggerAppCompatActivity
 
 
 /**
@@ -12,12 +11,13 @@ import com.marcinstramowski.socialmeal.R
  * Also specifies fragment change logic implementing [ActivityFragmentManager] to easily
  * manage them though fragments.
  */
-abstract class BaseActivity<out T : BaseContract.Presenter> : DaggerAppCompatActivity(), BaseContract.View<T>, ActivityFragmentManager {
+abstract class BaseActivity<out T : BaseContract.Presenter> : DaggerAppCompatActivity(),
+    BaseContract.View<T>, ActivityFragmentManager {
 
     /**
      * Defines layout resource of activity content view
      */
-    abstract val contentViewId : Int
+    abstract val contentViewId: Int
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,7 +72,12 @@ abstract class BaseActivity<out T : BaseContract.Presenter> : DaggerAppCompatAct
         val fragmentNotExists = supportFragmentManager.findFragmentByTag(fragmentTag) == null
         if (fragmentNotExists) {
             supportFragmentManager.beginTransaction().apply {
-                setCustomAnimations(R.anim.enter_fade, R.anim.exit_fade, R.anim.enter_fade, R.anim.exit_fade)
+                setCustomAnimations(
+                    R.anim.enter_fade,
+                    R.anim.exit_fade,
+                    R.anim.enter_fade,
+                    R.anim.exit_fade
+                )
                 replace(containerId, fragment, fragmentTag)
                 addToBackStack(fragmentTag)
             }.commit()

@@ -1,7 +1,6 @@
 package com.marcinstramowski.socialmeal.screens.main
 
 import android.os.Bundle
-import com.github.ajalt.timberkt.e
 import com.marcinstramowski.socialmeal.R
 import com.marcinstramowski.socialmeal.account.UserPrefsDataSource
 import com.marcinstramowski.socialmeal.screens.base.BaseActivity
@@ -42,6 +41,7 @@ class MainActivity : BaseActivity<MainContract.Presenter>(), MainContract.View {
             }
         }
     }
+
     private fun setNavigationDrawerDefaultTab() {
         navigation.selectedItemId = R.id.drawer_search
     }

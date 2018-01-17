@@ -6,10 +6,8 @@ import okhttp3.Request
 import okhttp3.Response
 import javax.inject.Inject
 
-/**
- * Created by marcinstramowski on 09.12.2017.
- */
-class AuthHeaderInterceptor @Inject constructor(private val userPrefs: UserPrefsDataSource) : Interceptor {
+class AuthHeaderInterceptor @Inject constructor(private val userPrefs: UserPrefsDataSource) :
+    Interceptor {
 
     companion object {
         const val AUTHORIZATION_HEADER = "Authorization"
@@ -18,7 +16,8 @@ class AuthHeaderInterceptor @Inject constructor(private val userPrefs: UserPrefs
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         return if (isHeaderNeeded(request))
-            chain.proceed(request
+            chain.proceed(
+                request
                     .newBuilder()
                     .addHeader(AUTHORIZATION_HEADER, "Bearer " + userPrefs.accessToken)
                     .build()

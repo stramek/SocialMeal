@@ -22,12 +22,15 @@ import javax.inject.Inject
  */
 class SignInFragment : BaseFragment<SignInContract.Presenter>(), SignInContract.View {
 
-    @Inject override lateinit var presenter: SignInContract.Presenter
+    @Inject
+    override lateinit var presenter: SignInContract.Presenter
 
     override val contentViewId = R.layout.fragment_sign_in
 
     override fun onCreated(savedInstanceState: Bundle?) {
-        signInProgressButton.setOnClickListener { presenter.onSignInButtonClick(collectSignInFormData()) }
+        signInProgressButton.setOnClickListener {
+            presenter.onSignInButtonClick(collectSignInFormData())
+        }
         resetPasswordButton.setOnClickListener { presenter.onResetPasswordClick() }
         signUpButton.setOnClickListener { presenter.onSignUpButtonClick() }
         signInFacebookButton.setOnClickListener { presenter.onSignInWithFacebookClick() }
@@ -39,17 +42,17 @@ class SignInFragment : BaseFragment<SignInContract.Presenter>(), SignInContract.
 
     private fun observeFormFields() {
         val formFieldsChanges: Observable<SignInFormFields> = Observable.combineLatest(
-                loginLogin.textChanges(),
-                loginPassword.textChanges(),
-                BiFunction { _, _ -> collectSignInFormData() }
+            loginLogin.textChanges(),
+            loginPassword.textChanges(),
+            BiFunction { _, _ -> collectSignInFormData() }
         )
         presenter.observeFieldsChanges(formFieldsChanges)
     }
 
     private fun collectSignInFormData(): SignInFormFields {
         return SignInFormFields(
-                loginLogin.text.toString().trim(),
-                loginPassword.text.toString()
+            loginLogin.text.toString().trim(),
+            loginPassword.text.toString()
         )
     }
 

@@ -54,7 +54,8 @@ class NetworkErrorMessageBuilder(private val throwable: Throwable) {
     }
 
     private fun getExceptionErrorMessageStringId(): Int {
-        val exceptionIndex = otherExceptions.indexOfFirst { it.exception.jvmName == throwable.javaClass.name }
+        val exceptionIndex =
+            otherExceptions.indexOfFirst { it.exception.jvmName == throwable.javaClass.name }
         if (exceptionIndex != -1) return otherExceptions[exceptionIndex].errorMessageStringRes
         return when (throwable) {
             is SocketTimeoutException -> R.string.timeout_exception

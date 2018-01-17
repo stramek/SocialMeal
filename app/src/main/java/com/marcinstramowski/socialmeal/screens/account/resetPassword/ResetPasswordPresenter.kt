@@ -17,47 +17,47 @@ import javax.inject.Inject
  * Reset password screen logic
  */
 class ResetPasswordPresenter @Inject constructor(
-        private val view: ResetPasswordContract.View,
-        private val managementApi: ServerApi.ManagementApi,
-        var schedulers: SchedulerProvider
+    private val view: ResetPasswordContract.View,
+    private val managementApi: ServerApi.ManagementApi,
+    var schedulers: SchedulerProvider
 ) : ResetPasswordContract.Presenter {
 
     private val compositeDisposable = CompositeDisposable()
 
     override fun observeFieldsChanges(emailObservable: Observable<ResetPasswordFormFields>) {
         compositeDisposable.add(emailObservable
-                .subscribeOn(schedulers.io())
-                .observeOn(schedulers.ui())
-                .doOnNext { formFields -> view.setResetButtonEnabled(formFields.emailValid()) }
-                .debounce(ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS, schedulers.ui())
-                .subscribe(
-                        { formFields -> view.showInvalidEmailMessage(formFields.shouldShowInvalidEmailMessage()) },
-                        { error -> e(error) }
-                )
+            .subscribeOn(schedulers.io())
+            .observeOn(schedulers.ui())
+            .doOnNext { formFields -> view.setResetButtonEnabled(formFields.emailValid()) }
+            .debounce(ERROR_MESSAGE_DELAY_MS, TimeUnit.MILLISECONDS, schedulers.ui())
+            .subscribe(
+                { formFields -> view.showInvalidEmailMessage(formFields.shouldShowInvalidEmailMessage()) },
+                { error -> e(error) }
+            )
         )
     }
 
     override fun onResetProgressButtonPressed(resetPasswordFormFields: ResetPasswordFormFields) {
         compositeDisposable.add(
-                managementApi.resetPassword(ResetPasswordRequest(resetPasswordFormFields.email))
-                        .subscribeOn(schedulers.io())
-                        .observeOn(schedulers.ui())
-                        .doOnSubscribe { view.setResetButtonProcessing(true) }
-                        .doAfterTerminate { view.setResetButtonProcessing(false) }
-                        .subscribe(
-                                { view.showResetPasswordSuccessMessage() },
-                                { error ->
-                                    view.showResetPasswordErrorMessage(getResetPasswordErrorMessage(error))
-                                    e(error)
-                                }
-                        )
+            managementApi.resetPassword(ResetPasswordRequest(resetPasswordFormFields.email))
+                .subscribeOn(schedulers.io())
+                .observeOn(schedulers.ui())
+                .doOnSubscribe { view.setResetButtonProcessing(true) }
+                .doAfterTerminate { view.setResetButtonProcessing(false) }
+                .subscribe(
+                    { view.showResetPasswordSuccessMessage() },
+                    { error ->
+                        view.showResetPasswordErrorMessage(getResetPasswordErrorMessage(error))
+                        e(error)
+                    }
+                )
         )
     }
 
     private fun getResetPasswordErrorMessage(error: Throwable): Int {
         return NetworkErrorMessageBuilder(error)
-                .addHttpErrorMessage(400, R.string.reset_password_no_email)
-                .getMessageStringId()
+            .addHttpErrorMessage(400, R.string.reset_password_no_email)
+            .getMessageStringId()
     }
 
     override fun onDestroy() {
@@ -66,5 +66,5 @@ class ResetPasswordPresenter @Inject constructor(
     }
 
     private fun ResetPasswordFormFields.shouldShowInvalidEmailMessage() =
-            this.emailNotValid() && this.email.isNotBlank()
+        this.emailNotValid() && this.email.isNotBlank()
 }
