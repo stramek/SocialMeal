@@ -5,7 +5,7 @@ It is only Android application, API for application in ASP.NET Core is here: htt
 
 ## Continuous integration
 
-Build / tests status:  [![Build Status](https://travis-ci.org/stramek/FoodShare.svg?branch=master)](https://travis-ci.org/stramek/FoodShare/)
+Master status:  [![Build Status](https://travis-ci.org/stramek/SocialMeal.svg?branch=master)](https://travis-ci.org/stramek/SocialMeal)
 
 ## Introduction
 
@@ -31,7 +31,7 @@ Upcoming Features:
 
 ## More developer info
 - MVP architecture,
-- Written in Kotlin,
+- written in Kotlin,
 - Dagger2 for DI,
 - RxJava2 for most asynchronous tasks.
 
