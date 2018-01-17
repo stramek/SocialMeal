@@ -35,7 +35,7 @@ interface ServerApi {
         @POST("account/refreshToken")
         fun refreshToken(@Body refreshTokenRequest: RefreshTokenRequest): Single<Token>
 
-        @POST("account/resetPassword")
+        @POST("account/forgot-password")
         fun resetPassword(@Body resetPasswordRequest: ResetPasswordRequest): Completable
     }
 

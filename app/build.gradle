@@ -20,10 +20,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField 'String', 'API_URL', '"http://apisocialmeal.azurewebsites.net/"'
+            buildConfigField 'String', 'API_URL', '"http://35.177.178.135/"'
         }
         debug {
-            buildConfigField 'String', 'API_URL', '"http://apisocialmeal.azurewebsites.net/"'
+            buildConfigField 'String', 'API_URL', '"http://35.177.178.135/"'
         }
     }
 }
