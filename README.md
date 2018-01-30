@@ -10,30 +10,43 @@ Master status:  [![Build Status](https://travis-ci.org/stramek/SocialMeal.svg?br
 ## Introduction
 
 Social meal is an application that allows people to meet at a shared meal. 
-The main purpose of the application is to improve interpersonal relationships, make new friends and a way to spend free time.
-The application is dedicated to people who like to cook and willingly share a meal and also for people who like to eat well.
+The main purpose of the application is to improve interpersonal relationships, make new friends and a way to spend free time. The application is dedicated to people who like to cook and willingly share a meal and also for people who like to eat well.
 
 ## Upcoming Features And Changes.
 
 This is begining of development. At this moment project include:
-- basic model classes,
-- sign in screen,
-- forgot password screen,
-- sign up screen.
 
-Upcoming Features:
-- mock server tests,
+- basic Dagger2 modules used for dependency injection,
+- continous integration (travis),
+- configuration of Retrofit2 to automatically refresh token,
+- login screen with presenter unit tests,
+- registration screen with presenter unit tests,
+- forgot password screen with presenter unit tests,
+- basic models to handle API requests on screens mentioned above
+
+## Upcoming features:
+- authorization server units tests,
 - profile screen layout,
 - profile screen logic,
 - profile screen upload avatar,
 - profile screen upload background photo,
-- profile screen tests.
+- profile screen unit tests
 
-## More developer info
-- MVP architecture,
-- written in Kotlin,
-- Dagger2 for DI,
-- RxJava2 for most asynchronous tasks.
+## In the more distant future:
+- ability to create meal share events,
+- ability to search and filter other people events,
+- ability to willingness to participate in other people events,
+- ability of event creator to accept or decline people,
+- push notifications
+- ability to login with facebook, twitter or google account
+
+## Used popular libraries and technologies
+- Kotlin language
+- MVP architecture
+- Dagger2
+- Retrofit2
+- RxJava2
+- JUnit4
 
 ## Application screenshots
 
