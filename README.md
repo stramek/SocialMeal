@@ -12,10 +12,7 @@ Master status:  [![Build Status](https://travis-ci.org/stramek/SocialMeal.svg?br
 Social meal is an application that allows people to meet at a shared meal. 
 The main purpose of the application is to improve interpersonal relationships, make new friends and a way to spend free time. The application is dedicated to people who like to cook and willingly share a meal and also for people who like to eat well.
 
-## Upcoming Features And Changes.
-
-This is begining of development. At this moment project include:
-
+## Working features
 - basic Dagger2 modules used for dependency injection,
 - continous integration (travis),
 - configuration of Retrofit2 to automatically refresh token,
@@ -24,7 +21,7 @@ This is begining of development. At this moment project include:
 - forgot password screen with presenter unit tests,
 - basic models to handle API requests on screens mentioned above
 
-## Upcoming features:
+## Upcoming features
 - authorization server units tests,
 - profile screen layout,
 - profile screen logic,
@@ -32,7 +29,7 @@ This is begining of development. At this moment project include:
 - profile screen upload background photo,
 - profile screen unit tests
 
-## In the more distant future:
+## In the more distant future
 - ability to create meal share events,
 - ability to search and filter other people events,
 - ability to willingness to participate in other people events,
@@ -49,7 +46,6 @@ This is begining of development. At this moment project include:
 - JUnit4
 
 ## Application screenshots
-
 ![Sign in screen 1](https://github.com/stramek/SocialMeal/blob/master/app_images/1.png?raw=true)
 ![Sign in screen 2](https://github.com/stramek/SocialMeal/blob/master/app_images/2.png?raw=true)
 ![Reset password screen](https://github.com/stramek/SocialMeal/blob/master/app_images/3.png?raw=true)
