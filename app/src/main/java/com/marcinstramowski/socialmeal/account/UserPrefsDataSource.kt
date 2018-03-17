@@ -1,6 +1,6 @@
 package com.marcinstramowski.socialmeal.account
 
-import com.marcinstramowski.socialmeal.model.SignInResponse
+import com.marcinstramowski.socialmeal.model.signIn.SignInResponse
 
 /**
  * Source interface for [UserAccountManager]

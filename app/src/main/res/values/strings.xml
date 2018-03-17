@@ -46,6 +46,7 @@
     <string name="profile_mock_score">4.98</string>
 
     <string name="timeout_exception">Server is taking too long to respond</string>
+    <string name="connect_exception">No internet connection</string>
     <string name="unknown_host_exception">Couldn\'t connect to a server</string>
     <string name="unknown_exception">An unknown error has occurred</string>
     <string name="unknown_http_exception">An unknown network error has occurred</string>

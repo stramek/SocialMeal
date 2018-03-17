@@ -1,7 +1,7 @@
 package com.marcinstramowski.socialmeal.screens.account.resetPassword
 
 import android.support.annotation.StringRes
-import com.marcinstramowski.socialmeal.model.ResetPasswordFormFields
+import com.marcinstramowski.socialmeal.model.resetPassword.ResetPasswordFormFields
 import com.marcinstramowski.socialmeal.screens.base.BaseContract
 import io.reactivex.Observable
 

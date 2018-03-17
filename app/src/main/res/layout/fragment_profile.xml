@@ -96,13 +96,14 @@
                     android:textStyle="bold" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/profileName"
+                    android:id="@+id/profileNameLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_normal"
                     android:hint="@string/profile_name">
 
                     <android.support.design.widget.TextInputEditText
+                        android:id="@+id/profileName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName" />
@@ -110,12 +111,13 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/profileSurname"
+                    android:id="@+id/profileSurnameLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/profile_surname">
 
                     <android.support.design.widget.TextInputEditText
+                        android:id="@+id/profileSurname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName" />
@@ -123,12 +125,13 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/profile_about"
+                    android:id="@+id/profileAboutLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/profile_about_me">
 
                     <android.support.design.widget.TextInputEditText
+                        android:id="@+id/profileAbout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 

@@ -1,4 +1,4 @@
-package com.marcinstramowski.socialmeal.model
+package com.marcinstramowski.socialmeal.model.signUp
 
 import com.marcinstramowski.socialmeal.account.CredentialsValidator
 

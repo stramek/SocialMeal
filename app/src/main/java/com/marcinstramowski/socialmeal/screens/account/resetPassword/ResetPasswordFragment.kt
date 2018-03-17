@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.jakewharton.rxbinding2.widget.textChanges
 import com.marcinstramowski.socialmeal.R
 import com.marcinstramowski.socialmeal.extensions.setCompatError
-import com.marcinstramowski.socialmeal.model.ResetPasswordFormFields
+import com.marcinstramowski.socialmeal.model.resetPassword.ResetPasswordFormFields
 import com.marcinstramowski.socialmeal.screens.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_reset_password.*
 import org.jetbrains.anko.support.v4.toast
@@ -29,7 +29,9 @@ class ResetPasswordFragment : BaseFragment<ResetPasswordContract.Presenter>(),
     }
 
     private fun collectResetPasswordFields() =
-        ResetPasswordFormFields(resetPasswordEmail.text.toString())
+        ResetPasswordFormFields(
+            resetPasswordEmail.text.toString()
+        )
 
     override fun setResetButtonEnabled(enabled: Boolean) {
         resetProgressButton.isEnabled = enabled

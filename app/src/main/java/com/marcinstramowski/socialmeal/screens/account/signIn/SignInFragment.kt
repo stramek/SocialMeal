@@ -5,7 +5,7 @@ import android.os.Bundle
 import com.jakewharton.rxbinding2.widget.textChanges
 import com.marcinstramowski.socialmeal.BuildConfig
 import com.marcinstramowski.socialmeal.R
-import com.marcinstramowski.socialmeal.model.SignInFormFields
+import com.marcinstramowski.socialmeal.model.signIn.SignInFormFields
 import com.marcinstramowski.socialmeal.screens.account.resetPassword.ResetPasswordFragment
 import com.marcinstramowski.socialmeal.screens.account.signUp.SignUpFragment
 import com.marcinstramowski.socialmeal.screens.base.BaseFragment

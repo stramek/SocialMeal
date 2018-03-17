@@ -1,7 +1,7 @@
 package com.marcinstramowski.socialmeal.screens.account.signUp
 
 import android.support.annotation.StringRes
-import com.marcinstramowski.socialmeal.model.SignUpFormFields
+import com.marcinstramowski.socialmeal.model.signUp.SignUpFormFields
 import com.marcinstramowski.socialmeal.screens.base.BaseContract
 import io.reactivex.Observable
 

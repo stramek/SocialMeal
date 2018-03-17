@@ -4,7 +4,7 @@ import com.marcinstramowski.socialmeal.account.UserAccountManager
 import com.marcinstramowski.socialmeal.account.UserPrefsDataSource
 import com.marcinstramowski.socialmeal.api.ServerApi
 import com.marcinstramowski.socialmeal.api.auth.AuthHeaderInterceptor.Companion.AUTHORIZATION_HEADER
-import com.marcinstramowski.socialmeal.model.RefreshTokenRequest
+import com.marcinstramowski.socialmeal.model.authorization.RefreshTokenRequest
 import okhttp3.Authenticator
 import okhttp3.Request
 import okhttp3.Response
@@ -46,5 +46,9 @@ class ApiAuthenticator @Inject constructor(
      * Call request for access token refresh
      */
     private fun refreshAccessToken(refreshToken: String) =
-        api.refreshToken(RefreshTokenRequest(refreshToken)).blockingGet().token
+        api.refreshToken(
+            RefreshTokenRequest(
+                refreshToken
+            )
+        ).blockingGet().token
 }

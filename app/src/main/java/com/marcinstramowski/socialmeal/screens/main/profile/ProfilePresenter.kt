@@ -1,6 +1,11 @@
 package com.marcinstramowski.socialmeal.screens.main.profile
 
+import com.github.ajalt.timberkt.Timber
 import com.marcinstramowski.socialmeal.api.ServerApi
+import com.marcinstramowski.socialmeal.rxSchedulers.SchedulerProvider
+import com.marcinstramowski.socialmeal.utils.NetworkErrorMessageBuilder
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
 /**
@@ -8,15 +13,39 @@ import javax.inject.Inject
  */
 class ProfilePresenter @Inject constructor(
     private val view: ProfileContract.View,
-    private val userApi: ServerApi.UserApi
-    ) : ProfileContract.Presenter {
+    private val userApi: ServerApi.UserApi,
+    private val schedulers: SchedulerProvider
+) : ProfileContract.Presenter {
+
+    private val compositeDisposable = CompositeDisposable()
 
     override fun onCreate() {
+        acquireUserProfile()
         view.setUserAvatar("www.asd/sample_image.png")
     }
 
-    override fun onDestroy() {
+    private fun acquireUserProfile() {
+        compositeDisposable.add(
+            userApi.getUserProfile()
+                .subscribeOn(schedulers.io())
+                .observeOn(schedulers.ui())
+                .subscribeBy(
+                    onSuccess = { userProfile ->
+                        view.showUserName(userProfile.firstName)
+                        view.showUserSurname(userProfile.surname)
+                        view.showUserRating(userProfile.rating)
+                        Timber.d { "Received profile: $userProfile" }
+                    },
+                    onError = { error ->
+                        view.showProfileAcquireError(NetworkErrorMessageBuilder(error).getMessageStringId())
+                        Timber.e(error, { "Error occurred when receiving profile!" })
+                    }
+                )
+        )
+    }
 
+    override fun onDestroy() {
+        compositeDisposable.clear()
     }
 
     override fun onSignOutButtonPressed() {

@@ -4,8 +4,8 @@ import com.github.ajalt.timberkt.e
 import com.marcinstramowski.socialmeal.R
 import com.marcinstramowski.socialmeal.account.CredentialsValidator.Companion.ERROR_MESSAGE_DELAY_MS
 import com.marcinstramowski.socialmeal.api.ServerApi
-import com.marcinstramowski.socialmeal.model.ResetPasswordFormFields
-import com.marcinstramowski.socialmeal.model.ResetPasswordRequest
+import com.marcinstramowski.socialmeal.model.resetPassword.ResetPasswordFormFields
+import com.marcinstramowski.socialmeal.model.resetPassword.ResetPasswordRequest
 import com.marcinstramowski.socialmeal.rxSchedulers.SchedulerProvider
 import com.marcinstramowski.socialmeal.utils.NetworkErrorMessageBuilder
 import io.reactivex.Observable
@@ -39,7 +39,11 @@ class ResetPasswordPresenter @Inject constructor(
 
     override fun onResetProgressButtonPressed(resetPasswordFormFields: ResetPasswordFormFields) {
         compositeDisposable.add(
-            managementApi.resetPassword(ResetPasswordRequest(resetPasswordFormFields.email))
+            managementApi.resetPassword(
+                ResetPasswordRequest(
+                    resetPasswordFormFields.email
+                )
+            )
                 .subscribeOn(schedulers.io())
                 .observeOn(schedulers.ui())
                 .doOnSubscribe { view.setResetButtonProcessing(true) }

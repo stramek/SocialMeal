@@ -5,9 +5,9 @@ import com.marcinstramowski.socialmeal.R
 import com.marcinstramowski.socialmeal.account.CredentialsValidator.Companion.ERROR_MESSAGE_DELAY_MS
 import com.marcinstramowski.socialmeal.account.UserPrefsDataSource
 import com.marcinstramowski.socialmeal.api.ServerApi
-import com.marcinstramowski.socialmeal.model.SignInRequest
-import com.marcinstramowski.socialmeal.model.SignUpFormFields
-import com.marcinstramowski.socialmeal.model.SignUpRequest
+import com.marcinstramowski.socialmeal.model.signIn.SignInRequest
+import com.marcinstramowski.socialmeal.model.signUp.SignUpFormFields
+import com.marcinstramowski.socialmeal.model.signUp.SignUpRequest
 import com.marcinstramowski.socialmeal.rxSchedulers.SchedulerProvider
 import com.marcinstramowski.socialmeal.utils.DeviceInfo
 import com.marcinstramowski.socialmeal.utils.NetworkErrorMessageBuilder

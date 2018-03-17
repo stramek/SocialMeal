@@ -1,7 +1,7 @@
 package com.marcinstramowski.socialmeal.screens.account.signIn
 
 import android.support.annotation.StringRes
-import com.marcinstramowski.socialmeal.model.SignInFormFields
+import com.marcinstramowski.socialmeal.model.signIn.SignInFormFields
 import com.marcinstramowski.socialmeal.screens.base.BaseContract
 import io.reactivex.Observable
 

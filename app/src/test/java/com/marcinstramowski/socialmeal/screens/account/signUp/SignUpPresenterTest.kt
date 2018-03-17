@@ -3,9 +3,9 @@ package com.marcinstramowski.socialmeal.screens.account.signUp
 import com.marcinstramowski.socialmeal.account.CredentialsValidator.Companion.ERROR_MESSAGE_DELAY_MS
 import com.marcinstramowski.socialmeal.account.UserPrefsDataSource
 import com.marcinstramowski.socialmeal.api.ServerApi
-import com.marcinstramowski.socialmeal.model.SignInResponse
-import com.marcinstramowski.socialmeal.model.SignUpFormFields
-import com.marcinstramowski.socialmeal.model.Token
+import com.marcinstramowski.socialmeal.model.signIn.SignInResponse
+import com.marcinstramowski.socialmeal.model.signUp.SignUpFormFields
+import com.marcinstramowski.socialmeal.model.authorization.Token
 import com.marcinstramowski.socialmeal.rxSchedulers.TestSchedulerProvider
 import com.marcinstramowski.socialmeal.rxSchedulers.TrampolineSchedulerProvider
 import com.marcinstramowski.socialmeal.utils.DeviceInfo
@@ -30,10 +30,14 @@ class SignUpPresenterTest {
     private val userPrefs = mock<UserPrefsDataSource>()
     private val managementApi = mock<ServerApi.ManagementApi>()
 
-    private val sampleSignUpFields = SignUpFormFields("name", "surname",
-            "email", "pass", "pass")
-    private val signInResponse = SignInResponse(Token("accessToken", 0),
-            Token("refreshToken", 0))
+    private val sampleSignUpFields = SignUpFormFields(
+        "name", "surname",
+        "email", "pass", "pass"
+    )
+    private val signInResponse = SignInResponse(
+        Token("accessToken", 0),
+        Token("refreshToken", 0)
+    )
 
     private var scheduler = TestScheduler()
 
@@ -238,5 +242,11 @@ class SignUpPresenterTest {
                        email: String = "test@gmail.com",
                        password: String = "Test123$",
                        confirmPassword: String = "Test123$"
-    ) = SignUpFormFields(firstName, surname, email, password, confirmPassword)
+    ) = SignUpFormFields(
+        firstName,
+        surname,
+        email,
+        password,
+        confirmPassword
+    )
 }

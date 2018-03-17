@@ -4,8 +4,8 @@ import com.github.ajalt.timberkt.e
 import com.marcinstramowski.socialmeal.R
 import com.marcinstramowski.socialmeal.account.UserPrefsDataSource
 import com.marcinstramowski.socialmeal.api.ServerApi
-import com.marcinstramowski.socialmeal.model.SignInFormFields
-import com.marcinstramowski.socialmeal.model.SignInRequest
+import com.marcinstramowski.socialmeal.model.signIn.SignInFormFields
+import com.marcinstramowski.socialmeal.model.signIn.SignInRequest
 import com.marcinstramowski.socialmeal.rxSchedulers.SchedulerProvider
 import com.marcinstramowski.socialmeal.utils.DeviceInfo
 import com.marcinstramowski.socialmeal.utils.NetworkErrorMessageBuilder
