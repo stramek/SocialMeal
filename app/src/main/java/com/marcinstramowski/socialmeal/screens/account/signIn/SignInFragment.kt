@@ -59,8 +59,8 @@ class SignInFragment : BaseFragment<SignInContract.Presenter>(), SignInContract.
     @SuppressLint("SetTextI18n")
     private fun setupDebugFields() {
         if (BuildConfig.DEBUG) {
-            loginLogin.setText("debugLogin")
-            loginPassword.setText("debugPassword")
+            loginLogin.setText("debugLogin@123.pl")
+            loginPassword.setText("debugPassword1")
         }
     }
 

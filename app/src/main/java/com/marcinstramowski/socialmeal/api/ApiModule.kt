@@ -25,7 +25,7 @@ class ApiModule {
 
     @Singleton
     @Provides
-    internal fun provideSocialMealApi(
+    internal fun provideUserApi(
         interceptor: AuthHeaderInterceptor, authenticator: ApiAuthenticator
     ): ServerApi.UserApi {
         return ServerApi.Factory.prepareUserService(interceptor, authenticator)
