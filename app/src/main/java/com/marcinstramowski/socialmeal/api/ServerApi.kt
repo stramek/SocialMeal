@@ -6,6 +6,7 @@ import com.marcinstramowski.socialmeal.api.auth.ApiAuthenticator
 import com.marcinstramowski.socialmeal.api.auth.AuthHeaderInterceptor
 import com.marcinstramowski.socialmeal.model.authorization.RefreshTokenRequest
 import com.marcinstramowski.socialmeal.model.authorization.Token
+import com.marcinstramowski.socialmeal.model.profile.ProfileUpdateRequest
 import com.marcinstramowski.socialmeal.model.profile.UserProfile
 import com.marcinstramowski.socialmeal.model.resetPassword.ResetPasswordRequest
 import com.marcinstramowski.socialmeal.model.signIn.SignInRequest
@@ -21,6 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import java.util.concurrent.TimeUnit
 
 /**
@@ -54,6 +56,9 @@ interface ServerApi {
         @GET("/me/profile")
         fun getUserProfile(): Single<UserProfile>
 
+
+        @PUT("/me/profile")
+        fun updateUserProfile(@Body profileUpdateRequest: ProfileUpdateRequest): Completable
     }
 
     companion object Factory {

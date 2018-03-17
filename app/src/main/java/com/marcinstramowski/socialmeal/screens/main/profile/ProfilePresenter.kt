@@ -2,6 +2,7 @@ package com.marcinstramowski.socialmeal.screens.main.profile
 
 import com.github.ajalt.timberkt.Timber
 import com.marcinstramowski.socialmeal.api.ServerApi
+import com.marcinstramowski.socialmeal.model.profile.ProfileUpdateRequest
 import com.marcinstramowski.socialmeal.rxSchedulers.SchedulerProvider
 import com.marcinstramowski.socialmeal.utils.NetworkErrorMessageBuilder
 import io.reactivex.disposables.CompositeDisposable
@@ -34,10 +35,9 @@ class ProfilePresenter @Inject constructor(
                         view.showUserName(userProfile.firstName)
                         view.showUserSurname(userProfile.surname)
                         view.showUserRating(userProfile.rating)
-                        Timber.d { "Received profile: $userProfile" }
                     },
                     onError = { error ->
-                        view.showProfileAcquireError(NetworkErrorMessageBuilder(error).getMessageStringId())
+                        view.showErrorMessage(NetworkErrorMessageBuilder(error).getMessageStringId())
                         Timber.e(error, { "Error occurred when receiving profile!" })
                     }
                 )
@@ -50,5 +50,22 @@ class ProfilePresenter @Inject constructor(
 
     override fun onSignOutButtonPressed() {
         view.signOut()
+    }
+
+    override fun onSaveProfileButtonPressed(profileUpdateRequest: ProfileUpdateRequest) {
+        compositeDisposable.add(
+            userApi.updateUserProfile(profileUpdateRequest)
+                .subscribeOn(schedulers.io())
+                .observeOn(schedulers.ui())
+                .doOnSubscribe { view.enableSaveButton(false) }
+                .doOnTerminate { view.enableSaveButton(true) }
+                .subscribeBy(
+                    onComplete = { view.showProfileUpdateSuccessMessage() },
+                    onError = { error ->
+                        view.showErrorMessage(NetworkErrorMessageBuilder(error).getMessageStringId())
+                        Timber.e(error, { "Error occurred when updating profile!" })
+                    }
+                )
+        )
     }
 }

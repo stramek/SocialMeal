@@ -56,4 +56,6 @@
 
     <string name="not_implemented_yet">Not implemented yet</string>
 
+    <string name="profile_update_success">Profile update success</string>
+
 </resources>

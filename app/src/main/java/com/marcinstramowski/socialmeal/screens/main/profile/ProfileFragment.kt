@@ -3,9 +3,11 @@ package com.marcinstramowski.socialmeal.screens.main.profile
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import com.bumptech.glide.request.RequestOptions.bitmapTransform
+import com.github.ajalt.timberkt.Timber
 import com.marcinstramowski.socialmeal.GlideApp
 import com.marcinstramowski.socialmeal.R
 import com.marcinstramowski.socialmeal.extensions.format
+import com.marcinstramowski.socialmeal.model.profile.ProfileUpdateRequest
 import com.marcinstramowski.socialmeal.screens.account.AccountActivity
 import com.marcinstramowski.socialmeal.screens.base.BaseFragment
 import jp.wasabeef.glide.transformations.BlurTransformation
@@ -25,6 +27,16 @@ class ProfileFragment : BaseFragment<ProfileContract.Presenter>(), ProfileContra
 
     override fun onCreated(savedInstanceState: Bundle?) {
         profile_sign_out.setOnClickListener { presenter.onSignOutButtonPressed() }
+        saveProfile.setOnClickListener { presenter.onSaveProfileButtonPressed(getProfileRequest()) }
+    }
+
+    private fun getProfileRequest(): ProfileUpdateRequest {
+        return ProfileUpdateRequest(
+            profileName.text.toString(),
+            profileSurname.text.toString(),
+            "",
+            listOf()
+        )
     }
 
     override fun setUserAvatar(avatarUrl: String) {
@@ -50,12 +62,21 @@ class ProfileFragment : BaseFragment<ProfileContract.Presenter>(), ProfileContra
         userScore.text = rating.format(2)
     }
 
-    override fun showProfileAcquireError(messageId: Int) {
+    override fun showErrorMessage(messageId: Int) {
         toast(messageId)
     }
 
     override fun signOut() {
         activity?.finish()
         startActivity<AccountActivity>()
+    }
+
+    override fun enableSaveButton(enabled: Boolean) {
+        Timber.e({ "Setting enabled: $enabled" })
+        saveProfile.isEnabled = enabled
+    }
+
+    override fun showProfileUpdateSuccessMessage() {
+        toast(R.string.profile_update_success)
     }
 }
