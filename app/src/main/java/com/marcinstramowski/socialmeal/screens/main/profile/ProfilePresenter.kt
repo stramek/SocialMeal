@@ -2,6 +2,7 @@ package com.marcinstramowski.socialmeal.screens.main.profile
 
 import com.github.ajalt.timberkt.Timber
 import com.marcinstramowski.socialmeal.api.ServerApi
+import com.marcinstramowski.socialmeal.model.profile.FoodTypes
 import com.marcinstramowski.socialmeal.model.profile.ProfileUpdateRequest
 import com.marcinstramowski.socialmeal.rxSchedulers.SchedulerProvider
 import com.marcinstramowski.socialmeal.utils.NetworkErrorMessageBuilder
@@ -35,6 +36,10 @@ class ProfilePresenter @Inject constructor(
                         view.showUserName(userProfile.firstName)
                         view.showUserSurname(userProfile.surname)
                         view.showUserRating(userProfile.rating)
+                        view.showUserDescription(userProfile.description)
+                        view.showFavouriteFood(
+                            userProfile.favouriteFoodType.firstOrNull()?.type ?: FoodTypes.UNDEFINED
+                        )
                     },
                     onError = { error ->
                         view.showErrorMessage(NetworkErrorMessageBuilder(error).getMessageStringId())
@@ -67,5 +72,9 @@ class ProfilePresenter @Inject constructor(
                     }
                 )
         )
+    }
+
+    override fun onChangePasswordPressed() {
+        view.showNotYetImplementedMessage()
     }
 }

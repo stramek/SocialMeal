@@ -58,4 +58,8 @@
 
     <string name="profile_update_success">Profile update success</string>
 
+    <string name="food_type_italian">Italian</string>
+    <string name="food_type_polish">Polish</string>
+    <string name="food_type_undefined">Undefined</string>
+
 </resources>

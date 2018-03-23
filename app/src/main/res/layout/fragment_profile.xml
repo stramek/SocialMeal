@@ -86,7 +86,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="@dimen/margin_normal">
+                android:padding="@dimen/margin_normal"
+                tools:background="@android:color/background_light">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -137,6 +138,12 @@
 
                 </android.support.design.widget.TextInputLayout>
 
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/profileFavouriteFood"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small" />
+
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/saveProfile"
                     android:layout_width="wrap_content"
@@ -146,14 +153,14 @@
                     android:background="?attr/selectableItemBackground"
                     android:padding="@dimen/margin_normal"
                     android:text="@string/profile_save_changes"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_button_state_color" />
+                    android:textColor="@color/text_button_state_color"
+                    android:textStyle="bold" />
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:id="@+id/account_management"
+            android:id="@+id/accountManagement"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_normal"
@@ -167,7 +174,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="@dimen/margin_normal">
+                android:padding="@dimen/margin_normal"
+                tools:background="@android:color/background_light">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -178,11 +186,12 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/profileChangePassword"
                     style="@style/ProfileOptionsButton"
                     android:text="@string/profile_change_password" />
 
                 <TextView
-                    android:id="@+id/profile_sign_out"
+                    android:id="@+id/profileSignOut"
                     style="@style/ProfileOptionsButton"
                     android:text="@string/profile_sign_out" />
 

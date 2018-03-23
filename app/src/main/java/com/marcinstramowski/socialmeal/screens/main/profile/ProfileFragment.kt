@@ -2,11 +2,12 @@ package com.marcinstramowski.socialmeal.screens.main.profile
 
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.widget.ArrayAdapter
 import com.bumptech.glide.request.RequestOptions.bitmapTransform
-import com.github.ajalt.timberkt.Timber
 import com.marcinstramowski.socialmeal.GlideApp
 import com.marcinstramowski.socialmeal.R
 import com.marcinstramowski.socialmeal.extensions.format
+import com.marcinstramowski.socialmeal.model.profile.FoodTypes
 import com.marcinstramowski.socialmeal.model.profile.ProfileUpdateRequest
 import com.marcinstramowski.socialmeal.screens.account.AccountActivity
 import com.marcinstramowski.socialmeal.screens.base.BaseFragment
@@ -26,16 +27,28 @@ class ProfileFragment : BaseFragment<ProfileContract.Presenter>(), ProfileContra
     override val contentViewId = R.layout.fragment_profile
 
     override fun onCreated(savedInstanceState: Bundle?) {
-        profile_sign_out.setOnClickListener { presenter.onSignOutButtonPressed() }
+        configureFoodTypeSpinner()
+        profileSignOut.setOnClickListener { presenter.onSignOutButtonPressed() }
+        profileChangePassword.setOnClickListener { presenter.onChangePasswordPressed() }
         saveProfile.setOnClickListener { presenter.onSaveProfileButtonPressed(getProfileRequest()) }
+
+    }
+
+    private fun configureFoodTypeSpinner() {
+        val adapter = ArrayAdapter(
+            context,
+            android.R.layout.simple_spinner_dropdown_item,
+            FoodTypes.getNames(context!!)
+        )
+        profileFavouriteFood.adapter = adapter
     }
 
     private fun getProfileRequest(): ProfileUpdateRequest {
         return ProfileUpdateRequest(
             profileName.text.toString(),
             profileSurname.text.toString(),
-            "",
-            listOf()
+            profileAbout.text.toString(),
+            listOf(FoodTypes.values()[profileFavouriteFood.selectedItemPosition].toString())
         )
     }
 
@@ -72,11 +85,22 @@ class ProfileFragment : BaseFragment<ProfileContract.Presenter>(), ProfileContra
     }
 
     override fun enableSaveButton(enabled: Boolean) {
-        Timber.e({ "Setting enabled: $enabled" })
         saveProfile.isEnabled = enabled
     }
 
     override fun showProfileUpdateSuccessMessage() {
         toast(R.string.profile_update_success)
+    }
+
+    override fun showUserDescription(description: String) {
+        profileAbout.setText(description)
+    }
+
+    override fun showFavouriteFood(favouriteFoodType: FoodTypes) {
+        profileFavouriteFood.setSelection(favouriteFoodType.ordinal)
+    }
+
+    override fun showNotYetImplementedMessage() {
+        toast(R.string.not_implemented_yet)
     }
 }
