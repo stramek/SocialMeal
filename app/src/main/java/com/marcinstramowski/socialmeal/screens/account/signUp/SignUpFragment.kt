@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.jakewharton.rxbinding2.widget.textChanges
 import com.marcinstramowski.socialmeal.R
 import com.marcinstramowski.socialmeal.extensions.setCompatError
-import com.marcinstramowski.socialmeal.model.SignUpFormFields
+import com.marcinstramowski.socialmeal.model.signUp.SignUpFormFields
 import com.marcinstramowski.socialmeal.screens.base.BaseFragment
 import com.marcinstramowski.socialmeal.screens.main.MainActivity
 import io.reactivex.Observable

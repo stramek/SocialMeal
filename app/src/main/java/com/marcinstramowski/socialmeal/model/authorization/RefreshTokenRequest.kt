@@ -1,4 +1,4 @@
-package com.marcinstramowski.socialmeal.model
+package com.marcinstramowski.socialmeal.model.authorization
 
 /**
  * Necessary data to refresh user token

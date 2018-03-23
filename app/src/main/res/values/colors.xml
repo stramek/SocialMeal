@@ -21,4 +21,7 @@
     <color name="account_button_disabled_color">#55FFFFFF</color>
     <color name="account_enabled_color">#FFFFFFFF</color>
     <color name="profile_divider_color">#33000000</color>
+
+    <color name="text_button_enabled_color">@color/colorPrimary</color>
+    <color name="text_button_disabled_color">#33000000</color>
 </resources>

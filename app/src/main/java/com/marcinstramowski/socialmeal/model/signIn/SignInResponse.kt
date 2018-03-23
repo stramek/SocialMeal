@@ -1,6 +1,7 @@
-package com.marcinstramowski.socialmeal.model
+package com.marcinstramowski.socialmeal.model.signIn
 
 import com.google.gson.annotations.SerializedName
+import com.marcinstramowski.socialmeal.model.authorization.Token
 
 /**
  * Response sign up data

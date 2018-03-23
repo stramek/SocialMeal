@@ -2,9 +2,9 @@ package com.marcinstramowski.socialmeal.screens.account.signIn
 
 import com.marcinstramowski.socialmeal.account.UserPrefsDataSource
 import com.marcinstramowski.socialmeal.api.ServerApi
-import com.marcinstramowski.socialmeal.model.SignInFormFields
-import com.marcinstramowski.socialmeal.model.SignInResponse
-import com.marcinstramowski.socialmeal.model.Token
+import com.marcinstramowski.socialmeal.model.signIn.SignInFormFields
+import com.marcinstramowski.socialmeal.model.signIn.SignInResponse
+import com.marcinstramowski.socialmeal.model.authorization.Token
 import com.marcinstramowski.socialmeal.rxSchedulers.TrampolineSchedulerProvider
 import com.marcinstramowski.socialmeal.utils.DeviceInfo
 import com.nhaarman.mockito_kotlin.*
@@ -25,9 +25,14 @@ class SignInPresenterTest {
     private val userPrefs = mock<UserPrefsDataSource>()
     private val managementApi = mock<ServerApi.ManagementApi>()
 
-    private val sampleSignInFields = SignInFormFields("email@email.com", "asdasd123")
-    private val signInResponse = SignInResponse(Token("accessToken", 0),
-            Token("refreshToken", 0))
+    private val sampleSignInFields = SignInFormFields(
+        "email@email.com",
+        "asdasd123"
+    )
+    private val signInResponse = SignInResponse(
+        Token("accessToken", 0),
+        Token("refreshToken", 0)
+    )
 
     @Before
     fun prepareTest() {
@@ -101,9 +106,24 @@ class SignInPresenterTest {
 
     @Test
     fun testSignInButtonDisabledIfAnyOfDataIsBlank() {
-        presenter.observeFieldsChanges(Observable.just(SignInFormFields("", "password123")))
-        presenter.observeFieldsChanges(Observable.just(SignInFormFields("email@email.com", "")))
-        presenter.observeFieldsChanges(Observable.just(SignInFormFields("email@email.com", "password123")))
+        presenter.observeFieldsChanges(Observable.just(
+            SignInFormFields(
+                "",
+                "password123"
+            )
+        ))
+        presenter.observeFieldsChanges(Observable.just(
+            SignInFormFields(
+                "email@email.com",
+                ""
+            )
+        ))
+        presenter.observeFieldsChanges(Observable.just(
+            SignInFormFields(
+                "email@email.com",
+                "password123"
+            )
+        ))
 
         inOrder(view) {
             verify(view, times(2)).setSignInButtonEnabled(false)

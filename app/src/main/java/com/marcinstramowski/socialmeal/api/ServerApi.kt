@@ -4,7 +4,14 @@ import com.google.gson.GsonBuilder
 import com.marcinstramowski.socialmeal.BuildConfig
 import com.marcinstramowski.socialmeal.api.auth.ApiAuthenticator
 import com.marcinstramowski.socialmeal.api.auth.AuthHeaderInterceptor
-import com.marcinstramowski.socialmeal.model.*
+import com.marcinstramowski.socialmeal.model.authorization.RefreshTokenRequest
+import com.marcinstramowski.socialmeal.model.authorization.Token
+import com.marcinstramowski.socialmeal.model.profile.ProfileUpdateRequest
+import com.marcinstramowski.socialmeal.model.profile.UserProfile
+import com.marcinstramowski.socialmeal.model.resetPassword.ResetPasswordRequest
+import com.marcinstramowski.socialmeal.model.signIn.SignInRequest
+import com.marcinstramowski.socialmeal.model.signIn.SignInResponse
+import com.marcinstramowski.socialmeal.model.signUp.SignUpRequest
 import io.reactivex.Completable
 import io.reactivex.Single
 import okhttp3.OkHttpClient
@@ -13,7 +20,9 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import java.util.concurrent.TimeUnit
 
 /**
@@ -44,6 +53,12 @@ interface ServerApi {
      */
     interface UserApi {
 
+        @GET("/me/profile")
+        fun getUserProfile(): Single<UserProfile>
+
+
+        @PUT("/me/profile")
+        fun updateUserProfile(@Body profileUpdateRequest: ProfileUpdateRequest): Completable
     }
 
     companion object Factory {
@@ -51,7 +66,7 @@ interface ServerApi {
         /**
          * Determines api maximum delay in seconds after sending request before returning timeout exception
          */
-        private const val API_TIMEOUT_DELAY_SECONDS: Long = 5
+        private const val API_TIMEOUT_DELAY_SECONDS: Long = 3
 
         /**
          * Prepare service with api calls for logged user.

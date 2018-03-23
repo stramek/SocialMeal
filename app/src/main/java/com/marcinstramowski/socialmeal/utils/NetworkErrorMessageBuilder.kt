@@ -3,6 +3,7 @@ package com.marcinstramowski.socialmeal.utils
 import android.support.annotation.StringRes
 import com.marcinstramowski.socialmeal.R
 import retrofit2.HttpException
+import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import kotlin.reflect.KClass
@@ -58,6 +59,7 @@ class NetworkErrorMessageBuilder(private val throwable: Throwable) {
             otherExceptions.indexOfFirst { it.exception.jvmName == throwable.javaClass.name }
         if (exceptionIndex != -1) return otherExceptions[exceptionIndex].errorMessageStringRes
         return when (throwable) {
+            is ConnectException -> R.string.connect_exception
             is SocketTimeoutException -> R.string.timeout_exception
             is UnknownHostException -> R.string.unknown_host_exception
             else -> R.string.unknown_exception

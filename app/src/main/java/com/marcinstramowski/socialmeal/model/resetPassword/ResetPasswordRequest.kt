@@ -1,4 +1,4 @@
-package com.marcinstramowski.socialmeal.model
+package com.marcinstramowski.socialmeal.model.resetPassword
 
 /**
  * Necessary data to reset password
